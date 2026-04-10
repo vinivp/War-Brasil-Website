@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Caminho Perdido - Hytale War</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <style>
+        .error-bg {
+            background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-[#020617] text-white font-sans overflow-hidden">
+
+    <div class="error-bg px-6">
+        <div class="floating mb-8">
+            <div class="relative">
+                <i class="fas fa-map-marked-alt text-9xl text-yellow-600/20"></i>
+                <i class="fas fa-question absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-yellow-500 glow-text"></i>
+            </div>
+        </div>
+
+        <h1 class="font-fantasy text-8xl md:text-9xl text-white mb-2 opacity-10">404</h1>
+        <h2 class="font-fantasy text-3xl md:text-4xl text-yellow-500 uppercase tracking-widest mb-4">Caminho Desconhecido</h2>
+        
+        <p class="max-w-md text-gray-400 text-sm md:text-base leading-relaxed mb-10">
+            Parece que te aventuraste por terras ainda não mapeadas. <br>
+            O mapa que segues está rasgado ou o destino foi apagado pelos deuses.
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-4">
+            <a href="index.html" class="bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-full uppercase text-xs tracking-widest transition-all transform hover:scale-105">
+                <i class="fas fa-home mr-2"></i> Voltar ao Spawn
+            </a>
+            <a href="https://discord.gg/teulink" target="_blank" class="bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold py-3 px-8 rounded-full uppercase text-xs tracking-widest transition-all">
+                <i class="fab fa-discord mr-2 text-indigo-400"></i> Reportar Bug
+            </a>
+        </div>
+
+        <div class="absolute bottom-0 w-full opacity-20 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#f1c40f" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </div>
+
+</body>
+</html>
