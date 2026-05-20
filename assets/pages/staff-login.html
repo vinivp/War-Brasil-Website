@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Staff - Hytale War Brasil</title>
+    <link
+      rel="icon"
+      type="image/webp"
+      href="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/staff.css" />
+  </head>
+  <body class="flex min-h-screen items-center justify-center p-4">
+    <main class="staff-panel w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl">
+      <a
+        href="/index.html"
+        class="mb-8 inline-flex items-center gap-2 text-sm text-yellow-500 hover:underline"
+      >
+        <i class="fas fa-arrow-left"></i> Voltar ao site
+      </a>
+
+      <div class="mb-8 text-center">
+        <img
+          src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+          alt="Logo Hytale War Brasil"
+          class="mx-auto mb-5 h-24"
+        />
+        <h1 class="font-fantasy text-3xl uppercase text-yellow-500">
+          Portal Staff
+        </h1>
+        <p class="mt-2 text-sm text-gray-400">Entre com CPF e senha.</p>
+      </div>
+
+      <form id="staff-login-form" class="space-y-4">
+        <div>
+          <label
+            for="cpf"
+            class="mb-2 block text-xs font-bold uppercase text-gray-500"
+          >
+            CPF
+          </label>
+          <input
+            id="cpf"
+            class="staff-input"
+            inputmode="numeric"
+            autocomplete="username"
+            placeholder="000.000.000-00"
+            required
+          />
+        </div>
+        <div>
+          <label
+            for="password"
+            class="mb-2 block text-xs font-bold uppercase text-gray-500"
+          >
+            Senha
+          </label>
+          <input
+            id="password"
+            class="staff-input"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <button type="submit" class="staff-button w-full">Entrar</button>
+        <p id="login-message" class="min-h-6 text-sm font-semibold"></p>
+      </form>
+
+      <section
+        id="setup-panel"
+        class="mt-8 hidden rounded-xl border border-white/10 bg-black/20 p-4"
+      >
+        <h2
+          class="mb-3 text-xs font-bold uppercase tracking-widest text-yellow-500"
+        >
+          Setup do primeiro acesso
+        </h2>
+        <form id="setup-form" class="space-y-3">
+          <input
+            id="setup-cpf"
+            class="staff-input"
+            inputmode="numeric"
+            placeholder="CPF para gerar e-mail técnico"
+          />
+          <button type="submit" class="staff-button w-full">
+            Gerar e-mail
+          </button>
+          <input id="setup-email-output" class="staff-input text-xs" readonly />
+        </form>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/assets/js/supabase-config.js"></script>
+    <script src="/assets/js/supabase-client.js"></script>
+    <script src="/assets/js/staff-auth.js"></script>
+    <script src="/assets/js/staff-login.js"></script>
+  </body>
+</html>

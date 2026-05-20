@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acessos Staff - Hytale War Brasil</title>
+    <link
+      rel="icon"
+      type="image/webp"
+      href="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/staff.css" />
+  </head>
+  <body>
+    <nav class="border-b border-yellow-600/20 bg-slate-950/90">
+      <div
+        class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+      >
+        <div class="flex items-center gap-3">
+          <img
+            src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+            alt="Logo Hytale War"
+            class="h-10"
+          />
+          <div>
+            <p class="font-fantasy text-yellow-500">Hytale War Brasil</p>
+            <p id="access-staff-name" class="text-xs text-gray-500">
+              Painel reservado
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <a
+            href="/index.html"
+            class="rounded-lg border border-white/10 px-3 py-2 text-xs font-bold uppercase text-gray-300 hover:text-white"
+          >
+            Site
+          </a>
+          <button
+            id="access-logout-button"
+            type="button"
+            class="rounded-lg border border-red-500/20 px-3 py-2 text-xs font-bold uppercase text-red-300 hover:bg-red-500/10"
+          >
+            Trocar chave
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      <header
+        class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+      >
+        <div>
+          <h1 class="font-fantasy text-3xl uppercase text-white">
+            Acessos da Staff
+          </h1>
+          <p class="mt-2 text-sm text-gray-400">
+            Controle separado para logins por CPF e senha.
+          </p>
+        </div>
+        <button
+          id="access-new-button"
+          type="button"
+          class="staff-button hidden inline-flex items-center justify-center gap-2"
+        >
+          <i class="fas fa-plus" aria-hidden="true"></i>
+          Novo acesso
+        </button>
+      </header>
+
+      <p
+        id="access-message"
+        class="mb-4 min-h-6 text-sm font-semibold text-yellow-400"
+      ></p>
+
+      <section
+        id="access-key-panel"
+        class="staff-panel mx-auto hidden max-w-md rounded-2xl p-5"
+      >
+        <h2 class="font-fantasy mb-2 text-xl uppercase text-yellow-500">
+          Chave mestra
+        </h2>
+        <p class="mb-4 text-sm text-gray-400">
+          Esta tela fica fora do login da staff e usa uma chave privada para
+          liberar a manutenção dos acessos.
+        </p>
+        <form id="access-key-form" class="grid gap-3">
+          <input
+            id="access-key"
+            class="staff-input"
+            type="password"
+            autocomplete="off"
+            placeholder="Cole a chave de acesso"
+            required
+          />
+          <button type="submit" class="staff-button">Liberar painel</button>
+        </form>
+      </section>
+
+      <section
+        id="access-content"
+        class="hidden grid gap-6 lg:grid-cols-[420px_minmax(0,1fr)]"
+      >
+        <div class="staff-panel rounded-2xl p-5">
+          <div class="mb-4 flex items-start justify-between gap-3">
+            <div>
+              <h2
+                id="access-form-title"
+                class="font-fantasy text-xl uppercase text-yellow-500"
+              >
+                Novo acesso
+              </h2>
+              <p
+                id="access-form-subtitle"
+                class="mt-1 text-xs uppercase tracking-widest text-gray-500"
+              >
+                CPF, senha e cargo
+              </p>
+            </div>
+            <button
+              id="access-cancel-button"
+              type="button"
+              class="hidden rounded-lg border border-white/10 px-3 py-2 text-xs font-bold uppercase text-gray-300 hover:text-white"
+            >
+              Cancelar
+            </button>
+          </div>
+
+          <form id="access-form" class="grid gap-3">
+            <input id="access-id" type="hidden" />
+
+            <div>
+              <label
+                for="access-name"
+                class="mb-2 block text-xs font-bold uppercase text-gray-500"
+              >
+                Nome
+              </label>
+              <input
+                id="access-name"
+                class="staff-input"
+                autocomplete="name"
+                placeholder="Nome do membro"
+                required
+              />
+            </div>
+
+            <div id="access-cpf-field">
+              <label
+                for="access-cpf"
+                class="mb-2 block text-xs font-bold uppercase text-gray-500"
+              >
+                CPF
+              </label>
+              <input
+                id="access-cpf"
+                class="staff-input"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="000.000.000-00"
+              />
+            </div>
+
+            <div>
+              <label
+                for="access-role"
+                class="mb-2 block text-xs font-bold uppercase text-gray-500"
+              >
+                Cargo
+              </label>
+              <select id="access-role" class="staff-input">
+                <option value="staff">Staff</option>
+                <option value="admin">Admin</option>
+                <option value="owner">Owner</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="access-password"
+                class="mb-2 block text-xs font-bold uppercase text-gray-500"
+              >
+                Senha
+              </label>
+              <input
+                id="access-password"
+                class="staff-input"
+                type="password"
+                autocomplete="new-password"
+                placeholder="Mínimo de 8 caracteres"
+              />
+            </div>
+
+            <label
+              class="flex items-center gap-3 rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-gray-300"
+            >
+              <input
+                id="access-active"
+                type="checkbox"
+                class="h-4 w-4 accent-yellow-500"
+                checked
+              />
+              Ativo
+            </label>
+
+            <button
+              id="access-submit-button"
+              type="submit"
+              class="staff-button inline-flex items-center justify-center gap-2"
+            >
+              <i class="fas fa-floppy-disk" aria-hidden="true"></i>
+              <span id="access-submit-label">Salvar acesso</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="staff-panel rounded-2xl p-5">
+          <div
+            class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <h2 class="font-fantasy text-xl uppercase text-yellow-500">
+              Contas cadastradas
+            </h2>
+            <button
+              id="access-refresh-button"
+              type="button"
+              class="rounded-lg border border-white/10 px-3 py-2 text-xs font-bold uppercase text-gray-300 hover:text-white"
+            >
+              <i class="fas fa-rotate-right mr-2" aria-hidden="true"></i>
+              Atualizar
+            </button>
+          </div>
+          <div id="access-list" class="space-y-3"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/assets/js/supabase-config.js"></script>
+    <script src="/assets/js/staff-auth.js"></script>
+    <script src="/assets/js/staff-access.js"></script>
+  </body>
+</html>

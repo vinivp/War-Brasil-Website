@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Servidor Hytale War Brasil com loja de VIPs, cash, terrenos, servos mineradores e comunidade no Discord."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hytalewar.com.br/" />
     <meta property="og:title" content="Hytale War Brasil | O Melhor Servidor" />
@@ -10,10 +14,17 @@
       property="og:description"
       content="Mergulhe em um mundo de fantasia, economia avançada e mods exclusivos."
     />
-    <meta property="og:image" content="logo-oficial.webp" />
+    <meta
+      property="og:image"
+      content="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+    />
     <title>Hytale War Brasil | Oficial</title>
+    <link
+      rel="icon"
+      type="image/webp"
+      href="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+    />
     <script src="https://cdn.tailwindcss.com" defer></script>
-    <link rel="icon" type="image/png" href="img/logo-oficial.webp" />
     <link rel="stylesheet" href="/assets/css/index.css" />
     <link
       rel="stylesheet"
@@ -26,15 +37,20 @@
   </head>
   <body>
     <nav
+      aria-label="Navegação principal"
       class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-lg border-b border-yellow-600/20 transition-all duration-300"
     >
       <div
-        class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center"
+        class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center"
       >
         <div class="flex items-center gap-4">
-          <img src="img/logo-oficial.webp" alt="Logo" class="h-14 glow-gold" />
+          <img
+            src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+            alt="Logo"
+            class="h-14 glow-gold"
+          />
           <span
-            class="font-fantasy text-xl text-yellow-500 tracking-tighter hidden md:block uppercase"
+            class="font-fantasy text-xl text-yellow-500 tracking-normal hidden md:block uppercase"
           >
             Hytale War Brasil
           </span>
@@ -47,6 +63,7 @@
 
           <div class="relative group h-full py-4">
             <button
+              type="button"
               class="flex items-center gap-2 hover:text-yellow-500 transition focus:outline-none"
             >
               Loja <i class="fas fa-chevron-down text-[10px]"></i>
@@ -97,15 +114,59 @@
 
         <div class="flex items-center gap-4">
           <a
+            href="/assets/pages/staff-login.html"
+            class="hidden md:inline-flex items-center gap-2 rounded-full border border-yellow-600/30 px-4 py-3 text-xs font-bold uppercase tracking-widest text-yellow-500 transition hover:border-yellow-500 hover:bg-yellow-600/10 hover:text-yellow-300"
+          >
+            <i class="fas fa-user-shield" aria-hidden="true"></i>
+            Portal Staff
+          </a>
+          <button
+            id="mobile-menu-button"
+            type="button"
+            aria-label="Abrir menu"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            class="md:hidden text-yellow-500 border border-yellow-600/30 w-11 h-11 rounded-full flex items-center justify-center hover:bg-yellow-600/10 transition"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <a
             href="/assets/pages/carrinho.html"
+            aria-label="Abrir carrinho"
             class="relative bg-yellow-600 hover:bg-yellow-500 text-black w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-[0_0_15px_rgba(202,138,4,0.4)] group"
           >
             <i class="fas fa-shopping-cart text-lg"></i>
             <span
-              class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full border-2 border-slate-900 flex items-center justify-center"
+              class="cart-count absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full border-2 border-slate-900 flex items-center justify-center"
             >
               0
             </span>
+          </a>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden border-t border-yellow-600/20 bg-slate-950/95"
+      >
+        <div
+          class="max-w-7xl mx-auto px-6 py-4 grid gap-3 font-fantasy text-sm uppercase tracking-widest text-gray-300"
+        >
+          <a href="#inicio" class="hover:text-yellow-500 transition">Início</a>
+          <a href="#vips" class="hover:text-yellow-500 transition">VIPs</a>
+          <a href="#cash" class="hover:text-yellow-500 transition">Cash</a>
+          <a href="#terreno" class="hover:text-yellow-500 transition"
+            >Terrenos</a
+          >
+          <a href="#pets" class="hover:text-yellow-500 transition">Servos</a>
+          <a href="#extras" class="hover:text-yellow-500 transition">Extras</a>
+          <a href="#staff" class="hover:text-yellow-500 transition">Staff</a>
+          <a
+            href="/assets/pages/staff-login.html"
+            class="mt-2 inline-flex items-center justify-center gap-2 rounded-lg border border-yellow-600/30 px-4 py-3 text-yellow-500 transition hover:bg-yellow-600/10 hover:text-yellow-300"
+          >
+            <i class="fas fa-user-shield" aria-hidden="true"></i>
+            Portal Staff
           </a>
         </div>
       </div>
@@ -115,27 +176,38 @@
       id="inicio"
       class="section-bg bg-inicio relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20"
     >
-      <div class="animate-fade">
+      <div class="animate-fade w-full max-w-5xl mx-auto">
         <img
-          src="img/logo-oficial.webp"
+          src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
           alt="Logo Principal"
-          class="w-72 mb-8 mx-auto glow-gold"
+          class="w-56 sm:w-72 mb-6 sm:mb-8 mx-auto glow-gold"
         />
         <h1
-          class="font-fantasy text-5xl md:text-7xl font-bold text-white mb-4 tracking-tighter uppercase"
+          class="font-fantasy text-4xl sm:text-5xl md:text-7xl leading-tight font-bold text-white mb-3 sm:mb-4 tracking-normal uppercase"
         >
-          O Melhor Servidor
-          <span class="text-yellow-500 underline decoration-yellow-600/30"
+          <span class="block sm:inline">O Melhor</span>
+          <span class="block sm:inline">Servidor</span>
+          <span
+            class="block sm:inline text-yellow-500 underline decoration-yellow-600/30"
             >Hytale</span
           >
         </h1>
-        <p class="text-gray-400 max-w-xl mx-auto mb-10 text-lg">
-          Mergulhe em um mundo de fantasia, economia avançada e mods exclusivos.
-          Sua jornada épica começa aqui.
+        <p
+          class="text-gray-400 w-full max-w-[22rem] sm:max-w-xl mx-auto mb-8 sm:mb-10 px-2 text-base sm:text-lg leading-relaxed"
+        >
+          <span class="block sm:inline">Mergulhe em um mundo</span>
+          <span class="block sm:inline sm:ml-1">de fantasia, economia</span>
+          <span class="block sm:inline sm:ml-1"
+            >avançada e mods exclusivos.</span
+          >
+          <span class="block sm:inline sm:ml-1"
+            >Sua jornada épica começa aqui.</span
+          >
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
+            type="button"
             onclick="copyIP(event)"
             class="bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-4 px-10 rounded-xl transition-all hover:scale-105 active:scale-95 shadow-xl"
           >
@@ -145,6 +217,7 @@
           <a
             href="https://discord.com/invite/FAFJuFSc8u"
             target="_blank"
+            rel="noopener noreferrer"
             class="bg-indigo-600 hover:bg-indigo-500 py-4 px-10 rounded-xl font-bold transition-all hover:scale-105 flex items-center justify-center"
           >
             <i class="fab fa-discord mr-2"></i> ENTRAR NO DISCORD
@@ -161,809 +234,1046 @@
 
     <section id="loja" class="section-bg bg-loja py-12">
       <div class="max-w-7xl mx-auto px-6">
-        <div
-          id="vips"
-          class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
-        >
-          <h2
-            class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
+        <div id="dynamic-store" class="hidden"></div>
+        <div id="static-store">
+          <div
+            id="vips"
+            class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
           >
-            Assinaturas VIP
-          </h2>
-          <p class="text-gray-500">Escolha seu caminho e domine o reino</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          <div class="shop-card border-2 border-yellow-500/50 shadow-lg group">
-            <img
-              src="img/vip_campones.png"
-              class="w-full h-56 object-cover transition group-hover:scale-105"
-            />
-            <div class="p-6">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
-                VIP CAMPONÊS
-              </h3>
-              <div class="text-gray-400 text-sm italic mb-4">
-                <ul>
-                  <li>🏠 | 3 Homes</li>
-                  <li>💰 | 50 Cash</li>
-                  <li>💵 | 5k Money</li>
-                  <li>🔎 | Acesso ao Canal de Spoilers</li>
-                  <li>🎪 | 2 Chunks por Ativação</li>
-                  <li>🏷️ | Tag exclusiva no Discord e no jogo</li>
-                </ul>
-              </div>
-              <div class="flex items-center justify-between mb-6">
-                <div class="text-white font-bold text-3xl">R$ 15,00</div>
-                <button
-                  onclick="openModal('modal-campones')"
-                  class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
-                >
-                  + INFO
-                </button>
-              </div>
-              <button onclick="adicionarAoCarrinho('VIP Camponês', 15.00, '/img/vip_campones.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg">
-                Adquirir Vip
-              </button>
-            </div>
+            <h2
+              class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
+            >
+              Assinaturas VIP
+            </h2>
+            <p class="text-gray-500">Escolha seu caminho e domine o reino</p>
           </div>
 
-          <div class="shop-card border-2 border-yellow-500/50 shadow-lg group">
-            <img
-              src="img/vip_nobre.png"
-              class="w-full h-56 object-cover transition group-hover:scale-105"
-            />
-            <div class="p-6">
-              <div class="flex justify-between items-start mb-4">
-                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                  VIP NOBRE
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          >
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg group"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/vip_campones.png"
+                alt="VIP Camponês"
+                loading="lazy"
+                class="w-full h-56 object-cover transition group-hover:scale-105"
+              />
+              <div class="p-6">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
+                  VIP CAMPONÊS
+                </h3>
+                <div class="text-gray-400 text-sm italic mb-4">
+                  <ul>
+                    <li>🏠 | 3 Homes</li>
+                    <li>💰 | 50 Cash</li>
+                    <li>💵 | 5k Money</li>
+                    <li>🔎 | Acesso ao Canal de Spoilers</li>
+                    <li>🎪 | 2 Chunks por Ativação</li>
+                    <li>🏷️ | Tag exclusiva no Discord e no jogo</li>
+                  </ul>
+                </div>
+                <div class="flex items-center justify-between mb-6">
+                  <div class="text-white font-bold text-3xl">R$ 15,00</div>
+                  <button
+                    type="button"
+                    onclick="openModal('modal-campones')"
+                    class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
+                  >
+                    + INFO
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      'VIP Camponês',
+                      15.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/vip_campones.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
+                >
+                  Adquirir Vip
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg group"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/vip_nobre.png"
+                alt="VIP Nobre"
+                loading="lazy"
+                class="w-full h-56 object-cover transition group-hover:scale-105"
+              />
+              <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                    VIP NOBRE
+                  </h3>
+
+                  <span
+                    class="text-[9px] bg-yellow-600 text-black px-2 py-1 rounded font-black uppercase"
+                    >Popular</span
+                  >
+                </div>
+
+                <div class="text-gray-400 text-sm italic mb-4">
+                  <ul>
+                    <li>🏠 | 5 Homes</li>
+                    <li>💰 | 100 Cash</li>
+                    <li>💵 | 15k Money</li>
+                    <li>🔎 | Acesso ao Canal de Spoilers</li>
+                    <li>🎪 | 5 Chunks por Ativação</li>
+                    <li>🏷️ | Tag exclusiva no Discord e no jogo</li>
+                    <li>🧭 | Acesso ao comando /back</li>
+                  </ul>
+                </div>
+
+                <div class="flex items-center justify-between mb-6">
+                  <div class="text-white font-bold text-3xl">R$ 30,00</div>
+                  <button
+                    type="button"
+                    onclick="openModal('modal-nobre')"
+                    class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
+                  >
+                    + INFO
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      'VIP Nobre',
+                      30.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/vip_nobre.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
+                >
+                  Adquirir Vip
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg group"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/vip_imperador.png"
+                alt="VIP Imperador"
+                loading="lazy"
+                class="w-full h-56 object-cover transition group-hover:scale-105"
+              />
+              <div class="p-6">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
+                  VIP IMPERADOR
                 </h3>
 
+                <div class="text-gray-400 text-sm italic mb-4">
+                  <ul>
+                    <li>🏠 | 10 Homes</li>
+                    <li>💰 | 300 Cash</li>
+                    <li>💵 | 50k Money</li>
+                    <li>🔎 | Acesso ao Canal de Spoilers</li>
+                    <li>🎪 | 8 Chunks por Ativação</li>
+                    <li>🏷️ | Tag exclusiva no Discord e no jogo</li>
+                    <li>🧭 | Acesso ao comando /back</li>
+                    <li>🛠️ | Acesso ao comando /repair x60</li>
+                  </ul>
+                </div>
+
+                <div class="flex items-center justify-between mb-6">
+                  <div class="text-white font-bold text-3xl">R$ 80,00</div>
+                  <button
+                    type="button"
+                    onclick="openModal('modal-imperador')"
+                    class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
+                  >
+                    + INFO
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      'VIP Imperador',
+                      80.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/vip_imperador.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
+                >
+                  Adquirir Vip
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="modal-campones"
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div
+              class="modal-content animate-modal w-[95%] lg:max-w-[1000px] flex flex-col"
+            >
+              <button
+                type="button"
+                class="close-modal"
+                onclick="closeModal('modal-campones')"
+                aria-label="Fechar modal"
+              >
+                &times;
+              </button>
+
+              <div class="text-center mb-6">
+                <h3
+                  class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
+                >
+                  Kits: VIP Camponês
+                </h3>
                 <span
-                  class="text-[9px] bg-yellow-600 text-black px-2 py-1 rounded font-black uppercase"
-                  >Popular</span
+                  class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30 uppercase"
+                  >Itens Exclusivos</span
                 >
               </div>
 
-              <div class="text-gray-400 text-sm italic mb-4">
-                <ul>
-                  <li>🏠 | 5 Homes</li>
-                  <li>💰 | 100 Cash</li>
-                  <li>💵 | 15k Money</li>
-                  <li>🔎 | Acesso ao Canal de Spoilers</li>
-                  <li>🎪 | 5 Chunks por Ativação</li>
-                  <li>🏷️ | Tag exclusiva no Discord e no jogo</li>
-                  <li>🧭 | Acesso ao comando /back</li>
-                </ul>
+              <div class="kit-scroll overflow-y-auto pr-2 custom-scrollbar">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-yellow-500">
+                      <i class="fas fa-calendar-day"></i>
+                      <h4 class="font-bold text-sm uppercase">Diário</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>🪓〡 Ferramentas básicas de Prata</li>
+                      <li>⚔️〡 Arma inicial de Prata (Espada)</li>
+                      <li>🧱〡 Bloco de Pedra×50</li>
+                      <li>🪵〡 30 Madeira</li>
+                      <li>🍞〡 5 Pães</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-green-500">
+                      <i class="fas fa-calendar-week"></i>
+                      <h4 class="font-bold text-sm uppercase">Semanal</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>🏹 〡 40 Arco + Flechas</li>
+                      <li>🛡️ 〡 1 Escudo de Ferro</li>
+                      <li>📦 〡 4 Baús</li>
+                      <li>🍞 〡 10 Pães</li>
+                      <li>🔥 〡 20 Tochas</li>
+                      <li>🛠️ 〡 2 Fornalhas</li>
+                      <li>👕 〡 Armadura de Ferro</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-purple-500">
+                      <i class="fas fa-calendar-alt"></i>
+                      <h4 class="font-bold text-sm uppercase">Mensal</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>🟤 〡 64 Cobre</li>
+                      <li>⚪ 〡 60 Ferro</li>
+                      <li>🟡 〡 20 Ouro</li>
+                      <li>⚙️ 〡 1 Estação Avançada de Trabalho</li>
+                      <li>🪵 〡 30 Couro</li>
+                      <li>🍞 〡 15 Pão</li>
+                      <li>🍖 〡 15 Saco de Veneno</li>
+                      <li>🌾 〡 5 Sementes de Trigo</li>
+                      <li>🥕 〡 5 Cenoura</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
-              <div class="flex items-center justify-between mb-6">
-                <div class="text-white font-bold text-3xl">R$ 30,00</div>
-                <button
-                  onclick="openModal('modal-nobre')"
-                  class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
-                >
-                  + INFO
-                </button>
-              </div>
-              <button onclick="adicionarAoCarrinho('VIP Nobre', 30.00, '/img/vip_nobre.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg">
-                Adquirir Vip
+              <button
+                type="button"
+                onclick="closeModal('modal-campones')"
+                class="modal-btn-close mt-6"
+              >
+                FECHAR JANELA
               </button>
             </div>
           </div>
 
-          <div class="shop-card border-2 border-yellow-500/50 shadow-lg group">
-            <img
-              src="img/vip_imperador.png"
-              class="w-full h-56 object-cover transition group-hover:scale-105"
-            />
-            <div class="p-6">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
-                VIP IMPERADOR
-              </h3>
-
-              <div class="text-gray-400 text-sm italic mb-4">
-                <ul>
-                  <li>🏠 | 10 Homes</li>
-                  <li>💰 | 300 Cash</li>
-                  <li>💵 | 50k Money</li>
-                  <li>🔎 | Acesso ao Canal de Spoilers</li>
-                  <li>🎪 | 8 Chunks por Ativação</li>
-                  <li>🏷️ | Tag exclusiva no Discord e no jogo</li>
-                  <li>🧭 | Acesso ao comando /back</li>
-                  <li>🛠️ | Acesso ao comando /repair x60</li>
-                </ul>
-              </div>
-
-              <div class="flex items-center justify-between mb-6">
-                <div class="text-white font-bold text-3xl">R$ 80,00</div>
-                <button
-                  onclick="openModal('modal-imperador')"
-                  class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
-                >
-                  + INFO
-                </button>
-              </div>
-              <button onclick="adicionarAoCarrinho('VIP Imperador', 80.00, '/img/vip_imperador.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg">
-                Adquirir Vip
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="modal-campones" class="modal">
-          <div
-            class="modal-content animate-modal w-[95%] lg:max-w-[1000px] flex flex-col"
-          >
-            <span class="close-modal" onclick="closeModal('modal-campones')"
-              >&times;</span
+          <div id="modal-nobre" class="modal" role="dialog" aria-modal="true">
+            <div
+              class="modal-content animate-modal w-[95%] lg:max-w-[1000px] flex flex-col"
             >
+              <button
+                type="button"
+                class="close-modal"
+                onclick="closeModal('modal-nobre')"
+                aria-label="Fechar modal"
+              >
+                &times;
+              </button>
 
-            <div class="text-center mb-6">
-              <h3
-                class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
+              <div class="text-center mb-6">
+                <h3
+                  class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
+                >
+                  Kits: VIP Nobre
+                </h3>
+                <span
+                  class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30 uppercase"
+                  >Itens Exclusivos</span
+                >
+              </div>
+
+              <div class="kit-scroll overflow-y-auto pr-2 custom-scrollbar">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-yellow-500">
+                      <i class="fas fa-calendar-day"></i>
+                      <h4 class="font-bold text-sm uppercase">Diário</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>🪓〡 Ferramentas básicas de Cobalto</li>
+                      <li>⚔️〡 Arma inicial de Cobalto</li>
+                      <li>🧱〡 100 Bloco de Pedra</li>
+                      <li>🪵〡 60 Madeira</li>
+                      <li>🍞〡 10 Pães</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-green-500">
+                      <i class="fas fa-calendar-week"></i>
+                      <h4 class="font-bold text-sm uppercase">Semanal</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>⚔️ 〡 1 Adagas</li>
+                      <li>🏹 〡 1 Arco de Cobalto + Flechas</li>
+                      <li>🛡️ 〡 1 Escudo de Cobalto</li>
+                      <li>👕 〡 1 Armadura de Cobalto</li>
+                      <li>🍞 〡 15 Pães</li>
+                      <li>❤️ 〡 16 Potion de Vida</li>
+                      <li>🩵 〡 6 Potion de Mana</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-purple-500">
+                      <i class="fas fa-calendar-alt"></i>
+                      <h4 class="font-bold text-sm uppercase">Mensal</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>⚔️ 〡 Espada de Fogo Lendária</li>
+                      <li>🟤 〡 100 Cobre</li>
+                      <li>⚪ 〡 80 Ferro</li>
+                      <li>🟡 〡 40 Ouro</li>
+                      <li>🔵 〡 40 Cobalto</li>
+                      <li>🟢 〡 25 Tório</li>
+                      <li>⚙️ 〡 Estação Avançada de Trabalho x1</li>
+                      <li>🪵 〡 30 Couro</li>
+                      <li>🍞 〡 25 Pão</li>
+                      <li>🍖 〡 15 Saco de Veneno</li>
+                      <li>🌾 〡 20 Sementes de Trigo</li>
+                      <li>🥕 〡 20 Cenoura</li>
+                      <li>🔥 〡 20 Essência de Fogo</li>
+                      <li>🧊 〡 40 Essência de Gelo</li>
+                      <li>👾 〡 100 Essência do Vazio</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onclick="closeModal('modal-nobre')"
+                class="modal-btn-close mt-6"
               >
-                Kits: VIP Camponês
-              </h3>
-              <span
-                class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30 uppercase"
-                >Itens Exclusivos</span
+                FECHAR JANELA
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="modal-imperador"
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div
+              class="modal-content animate-modal w-[95%] lg:max-w-[1000px] flex flex-col"
+            >
+              <button
+                type="button"
+                class="close-modal"
+                onclick="closeModal('modal-imperador')"
+                aria-label="Fechar modal"
               >
+                &times;
+              </button>
+
+              <div class="text-center mb-6">
+                <h3
+                  class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
+                >
+                  Kits: VIP Camponês
+                </h3>
+                <span
+                  class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30 uppercase"
+                  >Itens Exclusivos</span
+                >
+              </div>
+
+              <div class="kit-scroll overflow-y-auto pr-2 custom-scrollbar">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-yellow-500">
+                      <i class="fas fa-calendar-day"></i>
+                      <h4 class="font-bold text-sm uppercase">Diário</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>🪓 〡 Ferramentas básicas de Adamantina</li>
+                      <li>🏹 〡 20 Flechas</li>
+                      <li>🧱 〡 100 Bloco de Pedra</li>
+                      <li>🪵 〡 100 Madeira</li>
+                      <li>🍞 〡 12 Pães</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-green-500">
+                      <i class="fas fa-calendar-week"></i>
+                      <h4 class="font-bold text-sm uppercase">Semanal</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>⚔️ 〡 Adagas de Adamantina</li>
+                      <li>🏹 〡 40 Flechas</li>
+                      <li>🛡️ 〡 Escudo de Adamantina</li>
+                      <li>👕 〡 1 Armadura de Adamantina</li>
+                      <li>🟤 〡 80 Cobre</li>
+                      <li>⚪ 〡 50 Ferro</li>
+                      <li>🟡 〡 50 Ouro</li>
+                      <li>🔵 〡 20 Cobalto</li>
+                      <li>🟢 〡 20 Tório</li>
+                      <li>🔴 〡 10 Adamantine</li>
+                      <li>🍞 〡 25 Pão</li>
+                      <li>❤️ 〡 36 Potion de Vida</li>
+                      <li>🩵 〡 15 Potion de Mana</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-2 mb-3 text-purple-500">
+                      <i class="fas fa-calendar-alt"></i>
+                      <h4 class="font-bold text-sm uppercase">Mensal</h4>
+                    </div>
+                    <ul class="text-gray-400 text-[11px] space-y-2">
+                      <li>⚔️ 〡Espada Longa Flamejante</li>
+                      <li>🪓 〡Machado de Adamantina</li>
+                      <li>🟤 〡 100 Cobre</li>
+                      <li>⚪ 〡 100 Ferro</li>
+                      <li>🟡 〡 100 Ouro</li>
+                      <li>🔵 〡 90 Cobalto</li>
+                      <li>🟢 〡 50 Tório</li>
+                      <li>🔴 〡 10 Adamantine</li>
+                      <li>⚙️ 〡 Estação Avançada de Trabalho x1</li>
+                      <li>⚙️ 〡 Bigorna do Ferreiro x1</li>
+                      <li>🪵 〡 30 Couro Leve</li>
+                      <li>🪵 〡 20 Couro Médio</li>
+                      <li>🍞 〡 50 Pão</li>
+                      <li>🍖 〡 15 Saco de Veneno</li>
+                      <li>🌾 〡 40 Sementes de Trigo</li>
+                      <li>🥕 〡 40 Cenoura</li>
+                      <li>🔥 〡 20 Essência de Fogo</li>
+                      <li>🧊 〡 40 Essência de Gelo</li>
+                      <li>👾 〡 100 Essência do Vazio</li>
+                      <li>🔧 〡 40 Sucata</li>
+                      <li>🦴 〡 20 Fragmento de osso</li>
+                      <li>❤️ 〡 3 Coração do vazio</li>
+                      <li>🍂 〡 70 Sturdy Chitin</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onclick="closeModal('modal-imperador')"
+                class="modal-btn-close mt-6"
+              >
+                FECHAR JANELA
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="cash"
+            class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
+          >
+            <h2
+              class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
+            >
+              Pacotes de Cash
+            </h2>
+            <p class="text-gray-500">
+              Moeda virtual para uso no mercado in-game
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          >
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/50_cash.png"
+                alt="Pacote 50 Cash"
+                loading="lazy"
+                class="w-full h-40 object-cover"
+              />
+              <div class="p-5 flex flex-col flex-grow text-center">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                  50 Cash
+                </h3>
+                <p class="text-gray-400 text-xs italic mb-4 flex-grow mt-2">
+                  Dose inicial de vantagem.
+                </p>
+                <div class="text-green-500 font-bold text-2xl mb-4">
+                  R$ 15,00
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      '50 Cash',
+                      15.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/50_cash.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
+                >
+                  Adquirir Riqueza
+                </button>
+              </div>
             </div>
 
             <div
-              class="overflow-y-auto pr-2 custom-scrollbar"
-              style="max-height: 70vh"
+              class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
             >
-              <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-yellow-500">
-                    <i class="fas fa-calendar-day"></i>
-                    <h4 class="font-bold text-sm uppercase">Diário</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>🪓〡 Ferramentas básicas de Prata</li>
-                    <li>⚔️〡 Arma inicial de Prata (Espada)</li>
-                    <li>🧱〡 Bloco de Pedra×50</li>
-                    <li>🪵〡 30 Madeira</li>
-                    <li>🍞〡 5 Pães</li>
-                  </ul>
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/100_cash.png"
+                alt="Pacote 100 Cash"
+                loading="lazy"
+                class="w-full h-40 object-cover"
+              />
+              <div class="p-5 flex flex-col flex-grow text-center">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                  100 Cash
+                </h3>
+                <p class="text-gray-400 text-xs italic mb-4 flex-grow mt-2">
+                  Expansão inteligente de recursos.
+                </p>
+                <div class="text-green-500 font-bold text-2xl mb-4">
+                  R$ 29,00
                 </div>
-
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-green-500">
-                    <i class="fas fa-calendar-week"></i>
-                    <h4 class="font-bold text-sm uppercase">Semanal</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>🏹 〡 40 Arco + Flechas</li>
-                    <li>🛡️ 〡 1 Escudo de Ferro</li>
-                    <li>📦 〡 4 Baús</li>
-                    <li>🍞 〡 10 Pães</li>
-                    <li>🔥 〡 20 Tochas</li>
-                    <li>🛠️ 〡 2 Fornalhas</li>
-                    <li>👕 〡 Armadura de Ferro</li>
-                  </ul>
-                </div>
-
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-purple-500">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h4 class="font-bold text-sm uppercase">Mensal</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>🟤 〡 64 Cobre</li>
-                    <li>⚪ 〡 60 Ferro</li>
-                    <li>🟡 〡 20 Ouro</li>
-                    <li>⚙️ 〡 1 Estação Avançada de Trabalho</li>
-                    <li>🪵 〡 30 Couro</li>
-                    <li>🍞 〡 15 Pão</li>
-                    <li>🍖 〡 15 Saco de Veneno</li>
-                    <li>🌾 〡 5 Sementes de Trigo</li>
-                    <li>🥕 〡 5 Cenoura</li>
-                  </ul>
-                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      '100 Cash',
+                      29.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/100_cash.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
+                >
+                  Adquirir Riqueza
+                </button>
               </div>
-            </div>
-
-            <button
-              onclick="closeModal('modal-campones')"
-              class="modal-btn-close mt-6"
-            >
-              FECHAR JANELA
-            </button>
-          </div>
-        </div>
-
-        <div id="modal-nobre" class="modal">
-          <div
-            class="modal-content animate-modal w-[95%] lg:max-w-[1000px] flex flex-col"
-          >
-            <span class="close-modal" onclick="closeModal('modal-nobre')"
-              >&times;</span
-            >
-
-            <div class="text-center mb-6">
-              <h3
-                class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
-              >
-                Kits: VIP Nobre
-              </h3>
-              <span
-                class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30 uppercase"
-                >Itens Exclusivos</span
-              >
             </div>
 
             <div
-              class="overflow-y-auto pr-2 custom-scrollbar"
-              style="max-height: 70vh"
+              class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
             >
-              <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-yellow-500">
-                    <i class="fas fa-calendar-day"></i>
-                    <h4 class="font-bold text-sm uppercase">Diário</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>🪓〡 Ferramentas básicas de Cobalto</li>
-                    <li>⚔️〡 Arma inicial de Cobalto</li>
-                    <li>🧱〡 100 Bloco de Pedra</li>
-                    <li>🪵〡 60 Madeira</li>
-                    <li>🍞〡 10 Pães</li>
-                  </ul>
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/200_cash.png"
+                alt="Pacote 200 Cash"
+                loading="lazy"
+                class="w-full h-40 object-cover"
+              />
+              <div class="p-5 flex flex-col flex-grow text-center">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                  200 Cash
+                </h3>
+                <p class="text-gray-400 text-xs italic mb-4 flex-grow mt-2">
+                  Domínio estratégico no servidor.
+                </p>
+                <div class="text-green-500 font-bold text-2xl mb-4">
+                  R$ 55,00
                 </div>
-
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-green-500">
-                    <i class="fas fa-calendar-week"></i>
-                    <h4 class="font-bold text-sm uppercase">Semanal</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>⚔️ 〡 1 Adagas</li>
-                    <li>🏹 〡 1 Arco de Cobalto + Flechas</li>
-                    <li>🛡️ 〡 1 Escudo de Cobalto</li>
-                    <li>👕 〡 1 Armadura de Cobalto</li>
-                    <li>🍞 〡 15 Pães</li>
-                    <li>❤️ 〡 16 Potion de Vida</li>
-                    <li>🩵 〡 6 Potion de Mana</li>
-                  </ul>
-                </div>
-
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-purple-500">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h4 class="font-bold text-sm uppercase">Mensal</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>⚔️ 〡 Espada de Fogo Lendária</li>
-                    <li>🟤 〡 100 Cobre</li>
-                    <li>⚪ 〡 80 Ferro</li>
-                    <li>🟡 〡 40 Ouro</li>
-                    <li>🔵 〡 40 Cobalto</li>
-                    <li>🟢 〡 25 Tório</li>
-                    <li>⚙️ 〡 Estação Avançada de Trabalho x1</li>
-                    <li>🪵 〡 30 Couro</li>
-                    <li>🍞 〡 25 Pão</li>
-                    <li>🍖 〡 15 Saco de Veneno</li>
-                    <li>🌾 〡 20 Sementes de Trigo</li>
-                    <li>🥕 〡 20 Cenoura</li>
-                    <li>🔥 〡 20 Essência de Fogo</li>
-                    <li>🧊 〡 40 Essência de Gelo</li>
-                    <li>👾 〡 100 Essência do Vazio</li>
-                  </ul>
-                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      '200 Cash',
+                      55.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/200_cash.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
+                >
+                  Adquirir Riqueza
+                </button>
               </div>
-            </div>
-
-            <button
-              onclick="closeModal('modal-nobre')"
-              class="modal-btn-close mt-6"
-            >
-              FECHAR JANELA
-            </button>
-          </div>
-        </div>
-
-        <div id="modal-imperador" class="modal">
-          <div
-            class="modal-content animate-modal w-[95%] lg:max-w-[1000px] flex flex-col"
-          >
-            <span class="close-modal" onclick="closeModal('modal-imperador')"
-              >&times;</span
-            >
-
-            <div class="text-center mb-6">
-              <h3
-                class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
-              >
-                Kits: VIP Camponês
-              </h3>
-              <span
-                class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30 uppercase"
-                >Itens Exclusivos</span
-              >
             </div>
 
             <div
-              class="overflow-y-auto pr-2 custom-scrollbar"
-              style="max-height: 70vh"
+              class="shop-card border-2 border-yellow-600/40 shadow-xl shadow-yellow-600/5"
             >
-              <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/400_cash.png"
+                alt="Pacote 400 Cash"
+                loading="lazy"
+                class="w-full h-40 object-cover"
+              />
+              <div class="p-5 flex flex-col flex-grow text-center">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                  400 Cash
+                </h3>
+                <p class="text-gray-300 text-xs italic mb-4 flex-grow mt-2">
+                  Influência Imperial: O ápice da vantagem.
+                </p>
+                <div class="text-green-500 font-bold text-2xl mb-4">
+                  R$ 100,00
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      '400 Cash',
+                      100.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/400_cash.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
+                >
+                  Adquirir Riqueza
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="terreno"
+            class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
+          >
+            <h2
+              class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
+            >
+              Proteção de Terreno
+            </h2>
+            <p class="text-gray-500">
+              Expanda seu império com segurança absoluta
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          >
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/1_chunk.png"
+                alt="Pacote 1 Chunk Extra"
+                loading="lazy"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6 flex flex-col flex-grow text-center">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                  1 Chunk Extra
+                </h3>
+                <p class="text-gray-400 text-xs italic mb-6 flex-grow mt-2">
+                  Proteja sua casa inicial contra qualquer invasor.
+                </p>
+                <div class="text-yellow-500 font-bold text-2xl mb-4">
+                  R$ 5,00
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      '1 Chunk Extra',
+                      5.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/1_chunk.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
+                >
+                  Adquirir Terreno
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/5_chunk.png"
+                alt="Pacote 5 Chunks Extra"
+                loading="lazy"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6 flex flex-col flex-grow text-center">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                  5 Chunks Extra
+                </h3>
+                <p class="text-gray-400 text-xs italic mb-6 flex-grow mt-2">
+                  Ideal para vilas e plantações em crescimento.
+                </p>
+                <div class="text-yellow-500 font-bold text-2xl mb-4">
+                  R$ 22,50
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      '5 Chunks Extra',
+                      22.5,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/5_chunk.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition uppercase text-xs"
+                >
+                  Adquirir Terreno
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/10_chunks.png"
+                alt="Pacote 10 Chunks Extra"
+                loading="lazy"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6 flex flex-col flex-grow">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
+                  10 Chunks Extra
+                </h3>
+                <p class="text-gray-300 text-xs italic mb-6 flex-grow mt-2">
+                  A escolha dos grandes líderes para proteger reinos inteiros.
+                </p>
+                <div class="text-yellow-500 font-bold text-2xl mb-4">
+                  R$ 45,00
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      '10 Chunks Extra',
+                      45.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/10_chunks.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition uppercase text-xs"
+                >
+                  Adquirir Terreno
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="pets"
+            class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
+          >
+            <h2
+              class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
+            >
+              Servo Minerador
+            </h2>
+            <p class="text-gray-500">
+              Acelere o seu jogo com os servos mineradores
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          >
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg group"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/pet_slug.png"
+                alt="Slug Mineração Absoluta"
+                loading="lazy"
+                class="w-full h-56 object-cover transition group-hover:scale-105"
+              />
+              <div class="p-6">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
+                  Slug Mineração Absoluta
+                </h3>
+                <div class="flex items-center justify-between mb-6">
+                  <div class="text-white font-bold text-3xl">R$ 150,00</div>
+                  <button
+                    type="button"
+                    onclick="openModal('modal-pet')"
+                    class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
+                  >
+                    + INFO
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      'Slug Mineração Absoluta',
+                      150.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/pet_slug.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
+                >
+                  Adquirir pet
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg group"
+            >
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/pet_trork.png"
+                alt="Trork Mineração Absoluta"
+                loading="lazy"
+                class="w-full h-56 object-cover transition group-hover:scale-105"
+              />
+              <div class="p-6">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
+                  Trork Mineração Absoluta
+                </h3>
+                <div class="flex items-center justify-between mb-6">
+                  <div class="text-white font-bold text-3xl">R$ 150,00</div>
+                  <button
+                    type="button"
+                    onclick="openModal('modal-pet')"
+                    class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
+                  >
+                    + INFO
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      'Trork Mineração Absoluta',
+                      150.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/pet_trork.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
+                >
+                  Adquirir pet
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="modal-pet" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content animate-modal">
+              <button
+                type="button"
+                class="close-modal"
+                onclick="closeModal('modal-pet')"
+                aria-label="Fechar modal"
+              >
+                &times;
+              </button>
+
+              <div class="text-center mb-8">
+                <h3
+                  class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal mb-2"
+                >
+                  Pets de Mineração Absoluta
+                </h3>
+                <span
+                  class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30"
+                >
+                  <i class="fas fa-clock mr-1"></i>Permanente
+                </span>
+              </div>
+
+              <div class="space-y-3">
                 <div class="bg-white/5 p-4 rounded-xl border border-white/10">
                   <div class="flex items-center gap-2 mb-3 text-yellow-500">
                     <i class="fas fa-calendar-day"></i>
-                    <h4 class="font-bold text-sm uppercase">Diário</h4>
+                    <h4 class="font-bold text-sm uppercase">Benefícios</h4>
                   </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>🪓 〡 Ferramentas básicas de Adamantina</li>
-                    <li>🏹 〡 20 Flechas</li>
-                    <li>🧱 〡 100 Bloco de Pedra</li>
-                    <li>🪵 〡 100 Madeira</li>
-                    <li>🍞 〡 12 Pães</li>
-                  </ul>
-                </div>
-
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-green-500">
-                    <i class="fas fa-calendar-week"></i>
-                    <h4 class="font-bold text-sm uppercase">Semanal</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>⚔️ 〡 Adagas de Adamantina</li>
-                    <li>🏹 〡 40 Flechas</li>
-                    <li>🛡️ 〡 Escudo de Adamantina</li>
-                    <li>👕 〡 1 Armadura de Adamantina</li>
-                    <li>🟤 〡 80 Cobre</li>
-                    <li>⚪ 〡 50 Ferro</li>
-                    <li>🟡 〡 50 Ouro</li>
-                    <li>🔵 〡 20 Cobalto</li>
-                    <li>🟢 〡 20 Tório</li>
-                    <li>🔴 〡 10 Adamantine</li>
-                    <li>🍞 〡 25 Pão</li>
-                    <li>❤️ 〡 36 Potion de Vida</li>
-                    <li>🩵 〡 15 Potion de Mana</li>
-                  </ul>
-                </div>
-
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                  <div class="flex items-center gap-2 mb-3 text-purple-500">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h4 class="font-bold text-sm uppercase">Mensal</h4>
-                  </div>
-                  <ul class="text-gray-400 text-[11px] space-y-2">
-                    <li>⚔️ 〡Espada Longa Flamejante</li>
-                    <li>🪓 〡Machado de Adamantina</li>
-                    <li>🟤 〡 100 Cobre</li>
-                    <li>⚪ 〡 100 Ferro</li>
-                    <li>🟡 〡 100 Ouro</li>
-                    <li>🔵 〡 90 Cobalto</li>
-                    <li>🟢 〡 50 Tório</li>
-                    <li>🔴 〡 10 Adamantine</li>
-                    <li>⚙️ 〡 Estação Avançada de Trabalho x1</li>
-                    <li>⚙️ 〡 Bigorna do Ferreiro x1</li>
-                    <li>🪵 〡 30 Couro Leve</li>
-                    <li>🪵 〡 20 Couro Médio</li>
-                    <li>🍞 〡 50 Pão</li>
-                    <li>🍖 〡 15 Saco de Veneno</li>
-                    <li>🌾 〡 40 Sementes de Trigo</li>
-                    <li>🥕 〡 40 Cenoura</li>
-                    <li>🔥 〡 20 Essência de Fogo</li>
-                    <li>🧊 〡 40 Essência de Gelo</li>
-                    <li>👾 〡 100 Essência do Vazio</li>
-                    <li>🔧 〡 40 Sucata</li>
-                    <li>🦴 〡 20 Fragmento de osso</li>
-                    <li>❤️ 〡 3 Coração do vazio</li>
-                    <li>🍂 〡 70 Sturdy Chitin</li>
+                  <ul class="text-gray-400 text-xs space-y-3">
+                    <li class="flex items-center gap-2">
+                      <span class="text-orange-500 w-5 text-center"
+                        ><i class="fas fa-fire"></i
+                      ></span>
+                      | Imunidade total ao fogo
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <span class="text-blue-300 w-5 text-center"
+                        ><i class="fas fa-feather-alt"></i
+                      ></span>
+                      | Imunidade a danos de queda
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <span class="text-yellow-500 w-5 text-center"
+                        ><i class="fas fa-gem"></i
+                      ></span>
+                      | Fortuna na Mineração (2x minérios)
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <span class="text-yellow-400 w-5 text-center"
+                        ><i class="fas fa-bolt"></i
+                      ></span>
+                      | Aumento na velocidade de mineração
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <span class="text-red-500 w-5 text-center"
+                        ><i class="fas fa-magnet"></i
+                      ></span>
+                      | Ímã automático de itens colhidos
+                    </li>
                   </ul>
                 </div>
               </div>
-            </div>
 
-            <button
-              onclick="closeModal('modal-imperador')"
-              class="modal-btn-close mt-6"
+              <button
+                type="button"
+                onclick="closeModal('modal-pet')"
+                class="modal-btn-close"
+              >
+                FECHAR JANELA
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="extras"
+            class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
+          >
+            <h2
+              class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal"
             >
-              FECHAR JANELA
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="cash"
-          class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
-        >
-          <h2
-            class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
-          >
-            Pacotes de Cash
-          </h2>
-          <p class="text-gray-500">Moeda virtual para uso no mercado in-game</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div
-            class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
-          >
-            <img src="img/50_cash.png" class="w-full h-40 object-cover" />
-            <div class="p-5 flex flex-col flex-grow text-center">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                50 Cash
-              </h3>
-              <p class="text-gray-400 text-xs italic mb-4 flex-grow mt-2">
-                Dose inicial de vantagem.
-              </p>
-              <div class="text-green-500 font-bold text-2xl mb-4">R$ 15,00</div>
-              <button onclick="adicionarAoCarrinho('50 Cash', 15.00, '/img/50_cash.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
-              >
-                Adquirir Riqueza
-              </button>
-            </div>
+              Produtos Extras
+            </h2>
+            <p class="text-gray-500">
+              Se diferencie com itens ou habilidades exclusivas
+            </p>
           </div>
 
           <div
-            class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
           >
-            <img src="img/100_cash.png" class="w-full h-40 object-cover" />
-            <div class="p-5 flex flex-col flex-grow text-center">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                100 Cash
-              </h3>
-              <p class="text-gray-400 text-xs italic mb-4 flex-grow mt-2">
-                Expansão inteligente de recursos.
-              </p>
-              <div class="text-green-500 font-bold text-2xl mb-4">R$ 29,00</div>
-              <button onclick="adicionarAoCarrinho('100 Cash', 29.00, '/img/100_cash.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
-              >
-                Adquirir Riqueza
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
-          >
-            <img src="img/200_cash.png" class="w-full h-40 object-cover" />
-            <div class="p-5 flex flex-col flex-grow text-center">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                200 Cash
-              </h3>
-              <p class="text-gray-400 text-xs italic mb-4 flex-grow mt-2">
-                Domínio estratégico no servidor.
-              </p>
-              <div class="text-green-500 font-bold text-2xl mb-4">R$ 55,00</div>
-              <button onclick="adicionarAoCarrinho('200 Cash', 55.00, '/img/200_cash.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
-              >
-                Adquirir Riqueza
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="shop-card border-2 border-yellow-600/40 shadow-xl shadow-yellow-600/5"
-          >
-            <img src="img/400_cash.png" class="w-full h-40 object-cover" />
-            <div class="p-5 flex flex-col flex-grow text-center">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                400 Cash
-              </h3>
-              <p class="text-gray-300 text-xs italic mb-4 flex-grow mt-2">
-                Influência Imperial: O ápice da vantagem.
-              </p>
-              <div class="text-green-500 font-bold text-2xl mb-4">
-                R$ 100,00
-              </div>
-              <button onclick="adicionarAoCarrinho('400 Cash', 100.00, '/img/400_cash.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
-              >
-                Adquirir Riqueza
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="terreno"
-          class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
-        >
-          <h2
-            class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
-          >
-            Proteção de Terreno
-          </h2>
-          <p class="text-gray-500">
-            Expanda seu império com segurança absoluta
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div
-            class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
-          >
-            <img src="/img/1_chunk.png" class="w-full h-48 object-cover" />
-            <div class="p-6 flex flex-col flex-grow text-center">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                1 Chunk Extra
-              </h3>
-              <p class="text-gray-400 text-xs italic mb-6 flex-grow mt-2">
-                Proteja sua casa inicial contra qualquer invasor.
-              </p>
-              <div class="text-yellow-500 font-bold text-2xl mb-4">R$ 5,00</div>
-              <button onclick="adicionarAoCarrinho('1 Chunk Extra', 5.00, '/img/1_chunk.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition text-xs uppercase"
-              >
-                Adquirir Terreno
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
-          >
-            <img src="img/5_chunk.png" class="w-full h-48 object-cover" />
-            <div class="p-6 flex flex-col flex-grow text-center">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                5 Chunks Extra
-              </h3>
-              <p class="text-gray-400 text-xs italic mb-6 flex-grow mt-2">
-                Ideal para vilas e plantações em crescimento.
-              </p>
-              <div class="text-yellow-500 font-bold text-2xl mb-4">
-                R$ 22,50
-              </div>
-              <button
-                onclick="adicionarAoCarrinho('5 Chunks Extra', 22.50, '/img/5_chunk.png')"
-                class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition uppercase text-xs"
-              >
-                Adquirir Terreno
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="shop-card border-2 border-yellow-500/50 shadow-lg shadow-yellow-600/10"
-          >
-            <img src="img/10_chunks.png" class="w-full h-48 object-cover" />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase">
-                10 Chunks Extra
-              </h3>
-              <p class="text-gray-300 text-xs italic mb-6 flex-grow mt-2">
-                A escolha dos grandes líderes para proteger reinos inteiros.
-              </p>
-              <div class="text-yellow-500 font-bold text-2xl mb-4">
-                R$ 45,00
-              </div>
-              <button onclick="adicionarAoCarrinho('10 Chunks Extra', 45.00, '/img/10_chunks.png')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-3 rounded-lg font-bold transition uppercase text-xs"
-              >
-                Adquirir Terreno
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="pets"
-          class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
-        >
-          <h2
-            class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
-          >
-            Servo Minerador
-          </h2>
-          <p class="text-gray-500">
-            Acelere o seu jogo com os servos mineradores
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div class="shop-card border-2 border-yellow-500/50 shadow-lg group">
-            <img
-              src="img/pet_slug.png"
-              class="w-full h-56 object-cover transition group-hover:scale-105"
-            />
-            <div class="p-6">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
-                Slug Mineração Absoluta
-              </h3>
-              <div class="flex items-center justify-between mb-6">
-                <div class="text-white font-bold text-3xl">R$ 150,00</div>
-                <button
-                  onclick="openModal('modal-pet')"
-                  class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
-                >
-                  + INFO
-                </button>
-              </div>
-              <button
-                onclick="adicionarAoCarrinho('Slug Mineração Absoluta', 150.00, '/img/pet_slug.png')"
-                class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
-              >
-                Adquirir pet
-              </button>
-            </div>
-          </div>
-
-          <div class="shop-card border-2 border-yellow-500/50 shadow-lg group">
-            <img
-              src="/img/pet_trork.png"
-              class="w-full h-56 object-cover transition group-hover:scale-105"
-            />
-            <div class="p-6">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
-                Trork Mineração Absoluta
-              </h3>
-              <div class="flex items-center justify-between mb-6">
-                <div class="text-white font-bold text-3xl">R$ 150,00</div>
-                <button
-                  onclick="openModal('modal-pet')"
-                  class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
-                >
-                  + INFO
-                </button>
-              </div>
-              <button
-                onclick="adicionarAoCarrinho('Trork Mineração Absoluta', 150.00, '/img/pet_trork.png')"
-                class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
-              >
-                Adquirir pet
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="modal-pet" class="modal">
-          <div class="modal-content animate-modal">
-            <span class="close-modal" onclick="closeModal('modal-pet')"
-              >&times;</span
+            <div
+              class="shop-card border-2 border-yellow-500/50 shadow-lg group"
             >
-
-            <div class="text-center mb-8">
-              <h3
-                class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter mb-2"
-              >
-                Pets de Mineração Absoluta
-              </h3>
-              <span
-                class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30"
-              >
-                <i class="fas fa-clock mr-1"></i>Permanente
-              </span>
-            </div>
-
-            <div class="space-y-3">
-              <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                <div class="flex items-center gap-2 mb-3 text-yellow-500">
-                  <i class="fas fa-calendar-day"></i>
-                  <h4 class="font-bold text-sm uppercase">Benefícios</h4>
+              <img
+                src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/voar.png"
+                alt="Comando Voar"
+                loading="lazy"
+                class="w-full h-56 object-cover transition group-hover:scale-105"
+              />
+              <div class="p-6">
+                <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
+                  Comando /Voar
+                </h3>
+                <div class="flex items-center justify-between mb-6">
+                  <div class="text-white font-bold text-3xl">R$ 25,00</div>
+                  <button
+                    type="button"
+                    onclick="openModal('modal-voar')"
+                    class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
+                  >
+                    + INFO
+                  </button>
                 </div>
-                <ul class="text-gray-400 text-xs space-y-3">
-                  <li class="flex items-center gap-2">
-                    <span class="text-orange-500 w-5 text-center"
-                      ><i class="fas fa-fire"></i
-                    ></span>
-                    | Imunidade total ao fogo
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <span class="text-blue-300 w-5 text-center"
-                      ><i class="fas fa-feather-alt"></i
-                    ></span>
-                    | Imunidade a danos de queda
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <span class="text-yellow-500 w-5 text-center"
-                      ><i class="fas fa-gem"></i
-                    ></span>
-                    | Fortuna na Mineração (2x minérios)
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <span class="text-yellow-400 w-5 text-center"
-                      ><i class="fas fa-bolt"></i
-                    ></span>
-                    | Aumento na velocidade de mineração
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <span class="text-red-500 w-5 text-center"
-                      ><i class="fas fa-magnet"></i
-                    ></span>
-                    | Ímã automático de itens colhidos
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <button onclick="closeModal('modal-pet')" class="modal-btn-close">
-              FECHAR JANELA
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="extras"
-          class="category-header border-l-4 border-yellow-500 pl-4 mb-8"
-        >
-          <h2
-            class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter"
-          >
-            Produtos Extras
-          </h2>
-          <p class="text-gray-500">
-            Se diferencie com itens ou habilidades exclusivas
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div class="shop-card border-2 border-yellow-500/50 shadow-lg group">
-            <img
-              src="img/voar.png"
-              class="w-full h-56 object-cover transition group-hover:scale-105"
-            />
-            <div class="p-6">
-              <h3 class="font-fantasy text-xl text-yellow-500 uppercase mb-4">
-                Comando /Voar
-              </h3>
-              <div class="flex items-center justify-between mb-6">
-                <div class="text-white font-bold text-3xl">R$ 25,00</div>
                 <button
-                  onclick="openModal('modal-voar')"
-                  class="text-[10px] bg-slate-800 border border-yellow-600/30 text-yellow-500 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-black transition-all font-bold uppercase"
+                  type="button"
+                  onclick="
+                    adicionarAoCarrinho(
+                      'Comando /Voar',
+                      25.0,
+                      'https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/voar.png',
+                    )
+                  "
+                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
                 >
-                  + INFO
+                  Adquirir habilidade
                 </button>
               </div>
-              <button
-                onclick="adicionarAoCarrinho('Comando /Voar', 25.00, '/img/voar.png')"
-                class="w-full bg-yellow-600 hover:bg-yellow-500 text-black py-4 rounded-xl font-bold transition-all uppercase shadow-lg"
-              >
-                Adquirir pet
-              </button>
             </div>
           </div>
-        </div>
 
-        <div id="modal-voar" class="modal">
-          <div class="modal-content animate-modal">
-            <span class="close-modal" onclick="closeModal('modal-voar')"
-              >&times;</span
-            >
-
-            <div class="text-center mb-8">
-              <h3
-                class="font-fantasy text-3xl text-yellow-500 uppercase tracking-tighter mb-2"
+          <div id="modal-voar" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content animate-modal">
+              <button
+                type="button"
+                class="close-modal"
+                onclick="closeModal('modal-voar')"
+                aria-label="Fechar modal"
               >
-                Comando: /voar
-              </h3>
-              <span
-                class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30"
-              >
-                <i class="fas fa-clock mr-1"></i> 30 Minutos por 30 dias
-              </span>
-            </div>
+                &times;
+              </button>
 
-            <div class="space-y-3">
-              <div class="benefit-item">
-                <div class="benefit-icon">
-                  <i class="fas fa-feather-alt"></i>
+              <div class="text-center mb-8">
+                <h3
+                  class="font-fantasy text-3xl text-yellow-500 uppercase tracking-normal mb-2"
+                >
+                  Comando: /voar
+                </h3>
+                <span
+                  class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-600/30"
+                >
+                  <i class="fas fa-clock mr-1"></i> 30 Minutos por 30 dias
+                </span>
+              </div>
+
+              <div class="space-y-3">
+                <div class="benefit-item">
+                  <div class="benefit-icon">
+                    <i class="fas fa-feather-alt"></i>
+                  </div>
+                  <span class="text-gray-300 text-sm"
+                    >Voe livremente dentro da sua claim</span
+                  >
                 </div>
-                <span class="text-gray-300 text-sm"
-                  >Voe livremente dentro da sua claim</span
-                >
+                <div class="benefit-item">
+                  <div class="benefit-icon"><i class="fas fa-hammer"></i></div>
+                  <span class="text-gray-300 text-sm"
+                    >Construa com precisão milimétrica</span
+                  >
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-icon"><i class="fas fa-eye"></i></div>
+                  <span class="text-gray-300 text-sm"
+                    >Visualize builds de qualquer ângulo</span
+                  >
+                </div>
               </div>
-              <div class="benefit-item">
-                <div class="benefit-icon"><i class="fas fa-hammer"></i></div>
-                <span class="text-gray-300 text-sm"
-                  >Construa com precisão milimétrica</span
-                >
-              </div>
-              <div class="benefit-item">
-                <div class="benefit-icon"><i class="fas fa-eye"></i></div>
-                <span class="text-gray-300 text-sm"
-                  >Visualize builds de qualquer ângulo</span
-                >
-              </div>
-            </div>
 
-            <button onclick="closeModal('modal-voar')" class="modal-btn-close">
-              FECHAR JANELA
-            </button>
+              <button
+                type="button"
+                onclick="closeModal('modal-voar')"
+                class="modal-btn-close"
+              >
+                FECHAR JANELA
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -973,7 +1283,7 @@
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16 relative">
           <h2
-            class="font-fantasy text-4xl md:text-5xl text-yellow-500 uppercase tracking-tighter mb-4 relative z-10"
+            class="font-fantasy text-4xl md:text-5xl text-yellow-500 uppercase tracking-normal mb-4 relative z-10"
           >
             Linhagem Real
           </h2>
@@ -1001,9 +1311,13 @@
               <div
                 class="relative w-full h-full rounded-full border-2 border-yellow-500 p-1 bg-slate-800 flex items-center justify-center"
               >
-                <i
-                  class="fas fa-crown text-4xl text-yellow-500 group-hover:scale-110 transition-transform"
-                ></i>
+                <img
+                  src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/Logo_Goolds.png"
+                  alt="Avatar Goold"
+                  class="h-full w-full rounded-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <span
                 class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-yellow-600 text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap"
@@ -1028,9 +1342,13 @@
               <div
                 class="relative w-full h-full rounded-full border-2 border-yellow-500 p-1 bg-slate-800 flex items-center justify-center"
               >
-                <i
-                  class="fas fa-crown text-4xl text-yellow-500 group-hover:scale-110 transition-transform"
-                ></i>
+                <img
+                  src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/Logo_Magnum.png"
+                  alt="Avatar Magnum"
+                  class="h-full w-full rounded-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <span
                 class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-yellow-600 text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap"
@@ -1057,9 +1375,13 @@
               <div
                 class="relative w-full h-full rounded-full border-2 border-blue-500 p-1 bg-slate-800 flex items-center justify-center"
               >
-                <i
-                  class="fas fa-code text-4xl text-blue-500 group-hover:scale-110 transition-transform"
-                ></i>
+                <img
+                  src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/Logo_OfGodJohn.png"
+                  alt="Avatar OfGodJohn"
+                  class="h-full w-full rounded-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <span
                 class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap"
@@ -1070,7 +1392,7 @@
               OfGodJohn
             </h3>
             <p class="text-gray-500 text-sm mb-4 italic">
-              "Mestre das Runas & Código"
+              "Mestre das Runas &amp; Código"
             </p>
           </div>
 
@@ -1086,9 +1408,13 @@
               <div
                 class="relative w-full h-full rounded-full border-2 border-red-700 p-1 bg-slate-800 flex items-center justify-center"
               >
-                <i
-                  class="fas fa-shield-alt text-4xl text-red-700 group-hover:scale-110 transition-transform"
-                ></i>
+                <img
+                  src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/Logo_Tay.png"
+                  alt="Avatar Tay_"
+                  class="h-full w-full rounded-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <span
                 class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-red-700 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap"
@@ -1144,26 +1470,42 @@
       class="bg-slate-950 py-16 text-center border-t border-yellow-600/10"
     >
       <img
-        src="img/logo-oficial.webp"
+        src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+        alt="Logo Hytale War Brasil"
+        loading="lazy"
         class="h-20 mx-auto mb-8 opacity-70 hover:opacity-100 transition duration-500 cursor-pointer"
       />
       <div class="flex justify-center space-x-8 mb-8 text-2xl">
-        <a href="#" class="text-gray-500 hover:text-pink-500 transition"
+        <a
+          href="#"
+          aria-label="Instagram"
+          class="text-gray-500 hover:text-pink-500 transition"
           ><i class="fab fa-instagram"></i
         ></a>
-        <a href="#" class="text-gray-500 hover:text-red-600 transition"
+        <a
+          href="#"
+          aria-label="YouTube"
+          class="text-gray-500 hover:text-red-600 transition"
           ><i class="fab fa-youtube"></i
         ></a>
-        <a href="#" class="text-gray-500 hover:text-blue-600 transition"
+        <a
+          href="#"
+          aria-label="Facebook"
+          class="text-gray-500 hover:text-blue-600 transition"
           ><i class="fab fa-facebook"></i
         ></a>
-        <a href="#" class="text-gray-500 hover:text-red-600 transition"
+        <a
+          href="#"
+          aria-label="TikTok"
+          class="text-gray-500 hover:text-red-600 transition"
           ><i class="fab fa-tiktok"></i
         ></a>
 
         <a
           href="https://discord.com/invite/FAFJuFSc8u"
           target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Discord"
           class="text-gray-500 hover:text-indigo-400 transition"
         >
           <i class="fab fa-discord"></i>
@@ -1177,8 +1519,14 @@
       </p>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <script src="/assets/js/index.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+      defer
+    ></script>
+    <script src="/assets/js/supabase-config.js" defer></script>
+    <script src="/assets/js/supabase-client.js" defer></script>
+    <script src="/assets/js/store.js" defer></script>
   </body>
 </html>

@@ -1,6 +1,13 @@
 :root {
   --gold: #f1c40f;
+  --gold-dark: #ca8a04;
   --hytale-blue: #0f172a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
@@ -8,29 +15,39 @@ html {
 }
 
 body {
+  margin: 0;
   font-family: "Poppins", sans-serif;
   background-color: #050810;
   color: #e2e8f0;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .font-fantasy {
   font-family: "Cinzel", serif;
 }
 
 .bg-inicio {
-  background-image: url("/img/bg-inicio.png");
-}
-.bg-loja {
-  background-image: url("/img/bg-loja.png");
-}
-.bg-staff {
-  background-image: url("/img/bg-staff.png");
-}
-nav {
-  position: fixed;
+  background-image: url("https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/bg-inicio.png");
 }
 
-/* Garanta que esta classe abaixo exista para o efeito borrado funcionar */
+.bg-loja {
+  background-image: url("https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/bg-loja.png");
+}
+
+.bg-staff {
+  background-image: url("https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/bg-staff.png");
+}
+
 .section-bg {
   position: relative;
   background-attachment: fixed;
@@ -42,12 +59,9 @@ nav {
 .section-bg::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(2, 6, 23, 0.85); /* Escurece a imagem */
-  backdrop-filter: blur(8px); /* Borra a imagem */
+  inset: 0;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1;
 }
@@ -59,95 +73,98 @@ nav {
 
 .glow-gold {
   filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.3));
-  transition: 0.5s;
+  transition:
+    filter 0.5s ease,
+    transform 0.5s ease;
 }
+
 .glow-gold:hover {
   filter: drop-shadow(0 0 20px rgba(241, 196, 15, 0.6));
   transform: scale(1.02);
 }
 
 .shop-card {
-  background: rgba(
-    15,
-    23,
-    42,
-    0.7
-  ); /* Ajustado para 0.7 para melhor contraste */
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.72);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(241, 196, 15, 0.2);
+  border-radius: 16px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
+
 .shop-card:hover {
   border-color: var(--gold);
-  transform: translateY(-10px);
+  transform: translateY(-8px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
 }
 
 .shop-card img {
-  transition: transform 0.5s ease;
+  transition:
+    filter 0.5s ease,
+    transform 0.5s ease;
 }
 
 .shop-card:hover img {
-  transform: scale(1.1);
   filter: brightness(1.1);
+  transform: scale(1.06);
 }
 
-:root {
-  --gold: #f1c40f;
-  --gold-dark: #ca8a04;
-  --hytale-blue: #0f172a;
-}
-
-/* Estilo base do fundo do Modal */
 .modal {
-    display: none; 
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 5rem; /* Começa um pouco abaixo do topo para dar espaço para o conteúdo */
-    width: 100%;
-    height: 100%;
-    background-color: rgba(2, 6, 23, 0.95);
-    backdrop-filter: blur(10px);
-    
-    /* Centralização */
-    justify-content: center;
-    align-items: flex-start; /* Alinha no topo para permitir scroll de cima a baixo */
-    padding: 40px 20px; /* Espaço para o modal não encostar nas bordas da tela */
-    overflow-y: auto; /* O scroll agora acontece aqui, no fundo do modal! */
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 6rem 1.25rem 2rem;
+  overflow-y: auto;
+  background-color: rgba(2, 6, 23, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .modal-content {
-    top: 5%;
-    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-    padding: 40px;
-    border: 1px solid rgba(241, 196, 15, 0.3);
-    border-radius: 24px;
-    position: relative;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    align-items: center;
-    align-content: center;
-    /* Removemos o max-height fixo daqui, pois o scroll está no pai */
-    margin-bottom: 40px; /* Margem extra no fim para o scroll não acabar seco */
+  position: relative;
+  max-width: calc(100vw - 2rem);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+  border: 1px solid rgba(241, 196, 15, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-/* Scrollbar estilizada para o conteúdo interno */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
+.modal-content:not([class*="w-[95%]"]) {
+  width: min(100%, 42rem);
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #f1c40f;
-    border-radius: 10px;
+
+.kit-scroll {
+  max-height: 70vh;
 }
+
 .close-modal {
   position: absolute;
-  top: 20px;
-  right: 25px;
+  top: 14px;
+  right: 18px;
   color: #64748b;
   font-size: 32px;
   font-weight: 300;
+  line-height: 1;
+  padding: 0;
+  background: transparent;
+  border: 0;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .close-modal:hover {
@@ -155,57 +172,43 @@ nav {
   transform: rotate(90deg);
 }
 
-/* Botão de fechar dentro do modal */
 .modal-btn-close {
-  margin-top: 1.5rem;
   width: 100%;
-  border: 1px solid rgba(241, 196, 15, 0.4);
-  color: var(--gold);
+  margin-top: 1.5rem;
   padding: 14px;
-  border-radius: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  color: var(--gold);
   font-size: 0.75rem;
-  transition: 0.3s;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   background: transparent;
+  border: 1px solid rgba(241, 196, 15, 0.4);
+  border-radius: 12px;
   cursor: pointer;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease;
 }
 
 .modal-btn-close:hover {
-  background: var(--gold);
   color: black;
+  background: var(--gold);
   box-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
 }
 
-#space-y-4 {
-  display: flex;
-  flex-direction: wrap;
-  align-self: flex-start;
-}
-
-/* Animação de entrada */
-@keyframes modalEntry {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Estilização da lista de benefícios */
 .benefit-item {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: 0.3s;
+  border-radius: 12px;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .benefit-item:hover {
@@ -215,23 +218,25 @@ nav {
 }
 
 .benefit-icon {
+  display: flex;
   width: 32px;
   height: 32px;
-  display: flex;
+  flex: 0 0 32px;
   align-items: center;
   justify-content: center;
+  color: var(--gold);
   background: rgba(202, 138, 4, 0.15);
   border-radius: 8px;
-  color: var(--gold);
 }
 
-/* Custom scrollbar para caso o conteúdo seja longo em telas pequenas */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: var(--gold);
   border-radius: 10px;
@@ -242,6 +247,7 @@ nav {
     opacity: 0;
     transform: scale(0.9) translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -257,11 +263,53 @@ nav {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 .animate-fade {
   animation: fadeIn 0.8s ease forwards;
+}
+
+@media (max-width: 768px) {
+  .section-bg {
+    background-attachment: scroll;
+  }
+
+  #inicio > .animate-fade {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 1rem;
+  }
+
+  #inicio h1,
+  #inicio p {
+    max-width: 100%;
+  }
+
+  #inicio h1 {
+    font-size: clamp(2.1rem, 11vw, 2.75rem);
+  }
+
+  .modal {
+    padding: 5.25rem 0.75rem 1rem;
+  }
+
+  .benefit-item {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

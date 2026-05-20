@@ -4,62 +4,84 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finalizar Compra - Hytale War Brasil</title>
+    <link
+      rel="icon"
+      type="image/webp"
+      href="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="assets/css/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/index.css" />
   </head>
   <body class="bg-[#050810] text-white font-sans">
     <nav
-      class="w-full bg-slate-900/80 backdrop-blur-lg border-b border-yellow-600/20 py-4 px-6 flex justify-between items-center"
+      class="w-full bg-slate-900/80 backdrop-blur-lg border-b border-yellow-600/20 py-4 px-4 sm:px-6 flex justify-between items-center gap-4"
     >
-      <div class="flex items-center gap-3">
-        <img src="/img/logo-oficial.webp" alt="Logo" class="h-10" />
-        <span class="font-fantasy text-yellow-500 uppercase tracking-tighter"
+      <div class="flex items-center gap-3 min-w-0">
+        <img
+          src="https://lezyskkgqzzuqycngsod.supabase.co/storage/v1/object/public/war-assets/img/logo-oficial.webp"
+          alt="Logo Hytale War"
+          class="h-10"
+        />
+        <span
+          class="font-fantasy text-yellow-500 uppercase tracking-normal truncate"
           >Hytale War</span
         >
       </div>
       <a
         href="/index.html"
-        class="text-gray-400 hover:text-white text-xs uppercase font-bold"
+        class="text-gray-400 hover:text-white text-xs uppercase font-bold transition text-right"
       >
         <i class="fas fa-arrow-left mr-2"></i> Voltar para a Loja
       </a>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-12">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
         <div class="lg:col-span-2 space-y-8">
           <section
-            class="bg-slate-900/40 border border-white/5 p-8 rounded-2xl"
+            class="bg-slate-900/40 border border-white/5 p-5 sm:p-8 rounded-2xl"
           >
             <h2
-              class="text-xl font-fantasy text-yellow-500 uppercase mb-6 flex items-center gap-3"
+              class="text-lg sm:text-xl font-fantasy text-yellow-500 uppercase mb-6 flex items-center gap-3"
             >
               <i class="fas fa-user-circle"></i> 1. Identificação no Servidor
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label
-                  class="block text-xs text-gray-500 font-bold mb-2"
+                  for="nick"
+                  class="block text-xs text-gray-500 uppercase font-bold mb-2"
                   >Seu Nick (In-game)</label
                 >
                 <input
+                  id="nick"
                   type="text"
                   placeholder="Ex: Steve_Hytale"
+                  autocomplete="nickname"
+                  required
                   class="w-full bg-black/40 border border-white/10 rounded-lg py-3 px-4 focus:border-yellow-500 outline-none transition"
                 />
               </div>
               <div>
                 <label
+                  for="email"
                   class="block text-xs text-gray-500 uppercase font-bold mb-2"
                   >E-mail para Recibo</label
                 >
                 <input
+                  id="email"
                   type="email"
                   placeholder="seu@email.com"
+                  autocomplete="email"
+                  required
                   class="w-full bg-black/40 border border-white/10 rounded-lg py-3 px-4 focus:border-yellow-500 outline-none transition"
                 />
               </div>
@@ -67,174 +89,124 @@
           </section>
 
           <section
-            class="bg-slate-900/40 border border-white/5 p-8 rounded-2xl"
+            class="bg-slate-900/40 border border-white/5 p-5 sm:p-8 rounded-2xl"
           >
             <h2
-              class="text-xl font-fantasy text-yellow-500 uppercase mb-6 flex items-center gap-3"
+              class="text-lg sm:text-xl font-fantasy text-yellow-500 uppercase mb-6 flex items-center gap-3"
             >
               <i class="fas fa-credit-card"></i> 2. Forma de Pagamento
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <label class="relative cursor-pointer group">
-                <input type="radio" name="pay" class="peer hidden" checked />
-                <div
-                  class="p-4 border border-white/10 rounded-xl bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/5 transition"
+              <div class="relative group">
+                <input
+                  id="pay-pix"
+                  type="radio"
+                  name="pay"
+                  class="peer sr-only"
+                  checked
+                />
+                <label
+                  for="pay-pix"
+                  class="block cursor-pointer p-4 border border-white/10 rounded-xl bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/5 transition"
                 >
                   <i class="fab fa-pix text-2xl text-cyan-400 mb-2"></i>
-                  <p class="text-sm font-bold block">PIX</p>
+                  <span class="text-sm font-bold block">PIX</span>
                   <span class="text-[10px] text-gray-500 italic"
                     >Aprovação imediata</span
                   >
-                </div>
-              </label>
-              <label class="relative cursor-pointer group">
-                <input type="radio" name="pay" class="peer hidden" />
-                <div
-                  class="p-4 border border-white/10 rounded-xl bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/5 transition"
+                </label>
+              </div>
+              <div class="relative group">
+                <input
+                  id="pay-card"
+                  type="radio"
+                  name="pay"
+                  class="peer sr-only"
+                />
+                <label
+                  for="pay-card"
+                  class="block cursor-pointer p-4 border border-white/10 rounded-xl bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/5 transition"
                 >
                   <i class="fas fa-credit-card text-2xl text-blue-400 mb-2"></i>
-                  <p class="text-sm font-bold block">Cartão</p>
+                  <span class="text-sm font-bold block">Cartão</span>
                   <span class="text-[10px] text-gray-500 italic"
                     >Até 12x no MercadoPago</span
                   >
-                </div>
-              </label>
-              <label class="relative cursor-pointer group">
-                <input type="radio" name="pay" class="peer hidden" />
-                <div
-                  class="p-4 border border-white/10 rounded-xl bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/5 transition"
+                </label>
+              </div>
+              <div class="relative group">
+                <input
+                  id="pay-boleto"
+                  type="radio"
+                  name="pay"
+                  class="peer sr-only"
+                />
+                <label
+                  for="pay-boleto"
+                  class="block cursor-pointer p-4 border border-white/10 rounded-xl bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/5 transition"
                 >
                   <i class="fas fa-barcode text-2xl text-gray-400 mb-2"></i>
-                  <p class="text-sm font-bold block">Boleto</p>
+                  <span class="text-sm font-bold block">Boleto</span>
                   <span class="text-[10px] text-gray-500 italic"
                     >1 a 3 dias úteis</span
                   >
-                </div>
-              </label>
+                </label>
+              </div>
             </div>
           </section>
         </div>
 
-        <div class="lg:col-span-1">
+        <aside class="lg:col-span-1">
           <div
-            class="bg-slate-900 border border-yellow-600/20 p-8 rounded-2xl sticky top-28 shadow-2xl"
+            class="bg-slate-900 border border-yellow-600/20 p-5 sm:p-8 rounded-2xl lg:sticky lg:top-28 shadow-2xl"
           >
             <h2 class="text-lg font-fantasy text-white uppercase mb-6">
               Resumo da Compra
             </h2>
 
-            <div class="lg:col-span-1">
-              <div
-                class="bg-slate-900 border border-yellow-600/20 p-8 rounded-2xl sticky top-28 shadow-2xl"
-              >
-                <h2 class="text-lg font-fantasy text-white uppercase mb-6">
-                  Resumo da Compra
-                </h2>
+            <div
+              id="checkout-items-list"
+              class="space-y-4 mb-6 border-b border-white/5 pb-6"
+            ></div>
 
-                <div
-                  id="checkout-items-list"
-                  class="space-y-4 mb-6 border-b border-white/5 pb-6"
-                ></div>
-
-                <div class="mb-6">
-                  <div class="flex gap-2">
-                    <input
-                      type="text"
-                      id="cupom-input"
-                      placeholder="Cupom de Desconto"
-                      class="flex-1 bg-black/40 border border-white/10 rounded-lg py-2 px-3 text-xs outline-none focus:border-yellow-500"
-                    />
-                    <button
-                      class="bg-white/10 hover:bg-white/20 px-4 rounded-lg text-xs font-bold uppercase transition"
-                    >
-                      Aplicar
-                    </button>
-                  </div>
-                </div>
-
-                <div class="space-y-2 mb-8">
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>Subtotal</span>
-                    <span id="checkout-subtotal">R$ 0,00</span>
-                  </div>
-                  <div
-                    class="flex justify-between text-xl font-bold text-yellow-500 pt-2 border-t border-white/10"
-                  >
-                    <span>Total</span>
-                    <span id="checkout-total">R$ 0,00</span>
-                  </div>
-                </div>
-
+            <div class="mb-6">
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  id="cupom-input"
+                  placeholder="Cupom de Desconto"
+                  class="flex-1 bg-black/40 border border-white/10 rounded-lg py-2 px-3 text-xs outline-none focus:border-yellow-500"
+                />
                 <button
-                  onclick="processarPagamento()"
-                  class="w-full bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-4 rounded-xl uppercase tracking-widest transition-all shadow-lg hover:shadow-yellow-500/20 active:scale-95"
+                  type="button"
+                  class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-xs font-bold uppercase transition"
                 >
-                  <i class="fas fa-lock mr-2"></i> Finalizar Pagamento
+                  Aplicar
                 </button>
-
-                <p
-                  class="text-[10px] text-center text-gray-500 mt-4 leading-relaxed"
-                >
-                  Ao finalizar, você concorda com nossos <br />
-                  <a href="#" class="underline">Termos de Uso e Entrega</a>.
-                </p>
               </div>
             </div>
 
-            <script src="/assets/js/carrinho.js"></script>
-            <script>
-              // Executa assim que a página de checkout carregar
-              document.addEventListener(
-                "DOMContentLoaded",
-                renderizarResumoCheckout,
-              );
+            <div class="space-y-2 mb-8">
+              <div class="flex justify-between text-xs text-gray-500">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal">R$ 0,00</span>
+              </div>
+              <div
+                class="flex justify-between text-xl font-bold text-yellow-500 pt-2 border-t border-white/10"
+              >
+                <span>Total</span>
+                <span id="checkout-total">R$ 0,00</span>
+              </div>
+            </div>
 
-              function renderizarResumoCheckout() {
-                const container = document.getElementById(
-                  "checkout-items-list",
-                );
-                const carrinho =
-                  JSON.parse(localStorage.getItem("carrinho")) || [];
-                let html = "";
-                let total = 0;
-
-                if (carrinho.length === 0) {
-                  container.innerHTML =
-                    '<p class="text-gray-500 text-xs italic">Nenhum item selecionado.</p>';
-                  // Opcional: Redirecionar de volta para a loja se o carrinho estiver vazio
-                  // window.location.href = '/index.html';
-                  return;
-                }
-
-                carrinho.forEach((item) => {
-                  total += item.preco;
-                  html += `
-                <div class="flex justify-between items-center">
-                    <span class="text-sm text-gray-400">1x ${item.nome}</span>
-                    <span class="text-sm font-bold text-white">R$ ${item.preco.toFixed(2)}</span>
-                </div>
-            `;
-                });
-
-                container.innerHTML = html;
-                document.getElementById("checkout-subtotal").innerText =
-                  `R$ ${total.toFixed(2)}`;
-                document.getElementById("checkout-total").innerText =
-                  `R$ ${total.toFixed(2)}`;
-              }
-
-              function processarPagamento() {
-                const nick = document.querySelector(
-                  'input[placeholder*="Steve_Hytale"]',
-                ).value;
-                if (!nick) {
-                  alert("Por favor, informe seu Nick no jogo!");
-                  return;
-                }
-                alert(`Pedido enviado para processamento! Nick: ${nick}`);
-                // Aqui você integraria com o seu sistema de pagamento real
-              }
-            </script>
+            <button
+              id="finalizar-pagamento"
+              type="button"
+              onclick="processarPagamento()"
+              class="w-full bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-4 rounded-xl uppercase tracking-widest transition-all shadow-lg hover:shadow-yellow-500/20 active:scale-95"
+            >
+              <i class="fas fa-lock mr-2"></i> Finalizar Pagamento
+            </button>
 
             <p
               class="text-[10px] text-center text-gray-500 mt-4 leading-relaxed"
@@ -243,8 +215,14 @@
               <a href="#" class="underline">Termos de Uso e Entrega</a>.
             </p>
           </div>
-        </div>
+        </aside>
       </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/assets/js/supabase-config.js"></script>
+    <script src="/assets/js/supabase-client.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/checkout.js"></script>
   </body>
 </html>
