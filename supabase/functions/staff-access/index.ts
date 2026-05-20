@@ -2,6 +2,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 const masterKeySha256 =
   "c1d687b469a79d67efd7255aa5073944323ade935d1ad11dead62d642b3b672b";
+const legacyTechnicalEmailDomain = "@staff.hytalewar.local";
 
 const corsHeaders = {
   "Access-Control-Allow-Headers":
@@ -10,14 +11,25 @@ const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
 };
 
-type StaffRole = "owner" | "admin" | "staff";
 type StaffAccessAction =
   | "list"
   | "create"
   | "update"
   | "delete"
-  | "technical_email"
+  | "list_roles"
+  | "create_role"
+  | "update_role"
+  | "delete_role"
   | "upload_asset";
+
+type StaffRoleRecord = {
+  active: boolean;
+  description: string;
+  name: string;
+  protected: boolean;
+  slug: string;
+  sort_order: number;
+};
 
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -56,32 +68,76 @@ function getSecretKey() {
   return firstKey;
 }
 
-function normalizeCpf(cpf: unknown) {
-  return String(cpf || "").replace(/\D/g, "");
+function normalizeEmail(value: unknown) {
+  return String(value || "").trim().toLowerCase();
 }
 
-function validateCpf(cpf: unknown) {
-  const digits = normalizeCpf(cpf);
+function assertEmail(value: unknown) {
+  const email = normalizeEmail(value);
 
-  if (digits.length !== 11 || /^(\d)\1+$/.test(digits)) {
-    return false;
+  if (
+    email.length > 254 ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)
+  ) {
+    throw new Error("Informe um e-mail válido.");
   }
 
-  const calculateDigit = (base: string) => {
-    let sum = 0;
+  return email;
+}
 
-    for (let index = 0; index < base.length; index += 1) {
-      sum += Number(base[index]) * (base.length + 1 - index);
-    }
+function publicEmail(value: unknown) {
+  const email = normalizeEmail(value);
+  return email.endsWith(legacyTechnicalEmailDomain) ? "" : email;
+}
 
-    const rest = (sum * 10) % 11;
-    return rest === 10 ? 0 : rest;
-  };
+function normalizeRoleSlug(value: unknown) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 32);
+}
 
-  return (
-    calculateDigit(digits.slice(0, 9)) === Number(digits[9]) &&
-    calculateDigit(digits.slice(0, 10)) === Number(digits[10])
-  );
+function assertRoleSlug(value: unknown) {
+  const slug = normalizeRoleSlug(value);
+
+  if (!/^[a-z0-9-]{2,32}$/.test(slug)) {
+    throw new Error("Identificador do cargo inválido.");
+  }
+
+  return slug;
+}
+
+function assertRoleName(value: unknown) {
+  const name = String(value || "").trim();
+
+  if (name.length < 2 || name.length > 40) {
+    throw new Error("O nome do cargo precisa ter entre 2 e 40 caracteres.");
+  }
+
+  return name;
+}
+
+function assertRoleDescription(value: unknown) {
+  const description = String(value || "").trim();
+
+  if (description.length > 160) {
+    throw new Error("A descrição do cargo pode ter até 160 caracteres.");
+  }
+
+  return description;
+}
+
+function assertSortOrder(value: unknown) {
+  const sortOrder = Number(value || 0);
+
+  if (!Number.isInteger(sortOrder) || sortOrder < 0 || sortOrder > 999) {
+    throw new Error("A ordem do cargo precisa ficar entre 0 e 999.");
+  }
+
+  return sortOrder;
 }
 
 async function sha256Hex(value: string) {
@@ -105,28 +161,63 @@ async function isValidMasterKey(value: unknown) {
   return (await sha256Hex(key)) === masterKeySha256;
 }
 
-async function cpfToTechnicalEmail(cpf: unknown) {
-  const digits = normalizeCpf(cpf);
+async function getRole(
+  admin: ReturnType<typeof createClient>,
+  value: unknown,
+  options: { requireActive?: boolean } = {},
+) {
+  const slug = assertRoleSlug(value);
+  const { data, error } = await admin
+    .from("staff_roles")
+    .select("slug, name, description, active, protected, sort_order")
+    .eq("slug", slug)
+    .maybeSingle();
 
-  if (!validateCpf(digits)) {
-    throw new Error("CPF inválido.");
+  if (error || !data) {
+    throw error || new Error("Cargo não encontrado.");
   }
 
-  const cpfHash = await sha256Hex(digits);
+  const role = data as StaffRoleRecord;
 
-  return {
-    cpfHash,
-    cpfLast4: digits.slice(-4),
-    email: `${cpfHash}@staff.hytalewar.local`,
-  };
+  if (options.requireActive !== false && !role.active) {
+    throw new Error("Este cargo está inativo.");
+  }
+
+  return role;
 }
 
-function assertRole(value: unknown): StaffRole {
-  if (value === "owner" || value === "admin" || value === "staff") {
-    return value;
+async function assertAssignableRole(
+  admin: ReturnType<typeof createClient>,
+  value: unknown,
+) {
+  const role = await getRole(admin, value || "staff");
+  return role.slug;
+}
+
+async function assertUniqueProfileEmail(
+  admin: ReturnType<typeof createClient>,
+  email: string,
+  ignoredId = "",
+) {
+  let query = admin
+    .from("staff_profiles")
+    .select("id")
+    .eq("email", email)
+    .limit(1);
+
+  if (ignoredId) {
+    query = query.neq("id", ignoredId);
   }
 
-  return "staff";
+  const { data, error } = await query.maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  if (data) {
+    throw new Error("Este e-mail já está em uso por outro acesso.");
+  }
 }
 
 function decodeBase64(value: unknown) {
@@ -186,11 +277,6 @@ Deno.serve(async (req) => {
       auth: { persistSession: false },
     });
 
-    if (action === "technical_email") {
-      const { email } = await cpfToTechnicalEmail(body.cpf);
-      return jsonResponse({ email });
-    }
-
     if (action === "upload_asset") {
       const path = assertAssetPath(body.path);
       const contentType = assertImageContentType(body.content_type);
@@ -217,11 +303,105 @@ Deno.serve(async (req) => {
       return jsonResponse({ path, publicUrl: data.publicUrl });
     }
 
+    if (action === "list_roles") {
+      const { data, error } = await admin
+        .from("staff_roles")
+        .select(
+          "slug, name, description, active, protected, sort_order, created_at, updated_at",
+        )
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true });
+
+      if (error) {
+        throw error;
+      }
+
+      return jsonResponse({ roles: data || [] });
+    }
+
+    if (action === "create_role") {
+      const name = assertRoleName(body.name);
+      const slug = assertRoleSlug(body.slug || name);
+      const description = assertRoleDescription(body.description);
+      const active = body.active !== false;
+      const sortOrder = assertSortOrder(body.sort_order);
+
+      const { error } = await admin.from("staff_roles").insert({
+        active,
+        description,
+        name,
+        protected: false,
+        slug,
+        sort_order: sortOrder,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      return jsonResponse({ ok: true });
+    }
+
+    if (action === "update_role") {
+      const slug = assertRoleSlug(body.slug);
+      const currentRole = await getRole(admin, slug, { requireActive: false });
+      const name = assertRoleName(body.name);
+      const description = assertRoleDescription(body.description);
+      const active = currentRole.protected ? true : body.active !== false;
+      const sortOrder = assertSortOrder(body.sort_order);
+
+      const { error } = await admin
+        .from("staff_roles")
+        .update({
+          active,
+          description,
+          name,
+          sort_order: sortOrder,
+        })
+        .eq("slug", slug);
+
+      if (error) {
+        throw error;
+      }
+
+      return jsonResponse({ ok: true });
+    }
+
+    if (action === "delete_role") {
+      const slug = assertRoleSlug(body.slug);
+      const role = await getRole(admin, slug, { requireActive: false });
+
+      if (role.protected) {
+        throw new Error("Este cargo é protegido e não pode ser excluído.");
+      }
+
+      const { count, error: countError } = await admin
+        .from("staff_profiles")
+        .select("id", { count: "exact", head: true })
+        .eq("role", slug);
+
+      if (countError) {
+        throw countError;
+      }
+
+      if ((count || 0) > 0) {
+        throw new Error("Não é possível excluir um cargo em uso.");
+      }
+
+      const { error } = await admin.from("staff_roles").delete().eq("slug", slug);
+
+      if (error) {
+        throw error;
+      }
+
+      return jsonResponse({ ok: true });
+    }
+
     if (action === "list") {
       const { data, error } = await admin
         .from("staff_profiles")
         .select(
-          "id, display_name, role, cpf_last4, active, created_at, updated_at",
+          "id, display_name, role, email, active, created_at, updated_at",
         )
         .order("created_at", { ascending: false });
 
@@ -229,15 +409,20 @@ Deno.serve(async (req) => {
         throw error;
       }
 
-      return jsonResponse({ staff: data || [] });
+      return jsonResponse({
+        staff: (data || []).map((profile) => ({
+          ...profile,
+          email: publicEmail(profile.email),
+        })),
+      });
     }
 
     if (action === "create") {
       const displayName = String(body.display_name || "").trim();
+      const email = assertEmail(body.email);
       const password = String(body.password || "");
-      const role = assertRole(body.role);
+      const role = await assertAssignableRole(admin, body.role);
       const active = body.active !== false;
-      const { cpfHash, cpfLast4, email } = await cpfToTechnicalEmail(body.cpf);
 
       if (displayName.length < 2) {
         throw new Error("Informe um nome para o membro da staff.");
@@ -246,6 +431,8 @@ Deno.serve(async (req) => {
       if (password.length < 8) {
         throw new Error("A senha precisa ter pelo menos 8 caracteres.");
       }
+
+      await assertUniqueProfileEmail(admin, email);
 
       const { data: created, error: createError } =
         await admin.auth.admin.createUser({
@@ -263,9 +450,10 @@ Deno.serve(async (req) => {
         .from("staff_profiles")
         .upsert({
           active,
-          cpf_hash: cpfHash,
-          cpf_last4: cpfLast4,
+          cpf_hash: null,
+          cpf_last4: null,
           display_name: displayName,
+          email,
           id: created.user.id,
           role,
         });
@@ -281,7 +469,8 @@ Deno.serve(async (req) => {
     if (action === "update") {
       const targetId = String(body.id || "");
       const displayName = String(body.display_name || "").trim();
-      const role = assertRole(body.role);
+      const email = assertEmail(body.email);
+      const role = await assertAssignableRole(admin, body.role);
       const active = body.active !== false;
       const password = String(body.password || "");
 
@@ -303,16 +492,11 @@ Deno.serve(async (req) => {
         throw targetError || new Error("Membro da staff não encontrado.");
       }
 
-      const { error: profileError } = await admin
-        .from("staff_profiles")
-        .update({ active, display_name: displayName, role })
-        .eq("id", targetId);
-
-      if (profileError) {
-        throw profileError;
-      }
+      await assertUniqueProfileEmail(admin, email, targetId);
 
       const authUpdate: Record<string, unknown> = {
+        email,
+        email_confirm: true,
         user_metadata: { display_name: displayName },
       };
 
@@ -331,6 +515,15 @@ Deno.serve(async (req) => {
 
       if (authError) {
         throw authError;
+      }
+
+      const { error: profileError } = await admin
+        .from("staff_profiles")
+        .update({ active, display_name: displayName, email, role })
+        .eq("id", targetId);
+
+      if (profileError) {
+        throw profileError;
       }
 
       return jsonResponse({ ok: true });

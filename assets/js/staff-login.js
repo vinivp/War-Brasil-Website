@@ -1,35 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("staff-login-form");
   const message = document.getElementById("login-message");
-  const setupPanel = document.getElementById("setup-panel");
-  const setupForm = document.getElementById("setup-form");
   const searchParams = new URLSearchParams(window.location.search);
-
-  if (searchParams.get("setup") === "1") {
-    setupPanel?.classList.remove("hidden");
-  }
-
-  setupForm?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const cpf = document.getElementById("setup-cpf").value;
-    const output = document.getElementById("setup-email-output");
-
-    try {
-      output.value = await WarStaffAuth.cpfParaEmailTecnico(cpf);
-    } catch (error) {
-      output.value = error.message;
-    }
-  });
 
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     setMessage("Entrando...", "text-yellow-400");
 
-    const cpf = document.getElementById("cpf").value;
+    const email = normalizarEmail(document.getElementById("email").value);
     const password = document.getElementById("password").value;
 
+    if (!email) {
+      setMessage("Informe um e-mail válido.", "text-red-400");
+      return;
+    }
+
     try {
-      const email = await WarStaffAuth.cpfParaEmailTecnico(cpf);
       const { data, error } = await warSupabase.auth.signInWithPassword({
         email,
         password,
@@ -47,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (profileError || !profile?.active) {
         await warSupabase.auth.signOut();
-        throw new Error("Este CPF ainda não está ativo como membro da staff.");
+        throw new Error(
+          "Este e-mail ainda não está ativo como membro da staff.",
+        );
       }
 
       window.location.href = getSafeRedirect(searchParams.get("redirect"));
@@ -55,6 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
       setMessage(error.message || "Não foi possível entrar.", "text-red-400");
     }
   });
+
+  function normalizarEmail(value) {
+    const email = String(value || "").trim().toLowerCase();
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? email : "";
+  }
 
   function setMessage(text, className) {
     message.textContent = text;
