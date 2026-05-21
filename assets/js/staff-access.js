@@ -330,8 +330,8 @@ function renderizarCargos() {
     accessState.roles
       .map((role) => {
         const usageCount = contarMembrosPorCargo(role.slug);
-        const canDelete = !role.protected && usageCount === 0;
-        const canToggle = !role.protected;
+        const canDelete = usageCount === 0;
+        const canToggle = true;
 
         return `
         <article class="rounded-xl border border-white/10 bg-black/20 p-4">
@@ -343,11 +343,6 @@ function renderizarCargos() {
                 <span class="rounded-full border ${role.active ? "border-green-500/20 text-green-400" : "border-red-500/20 text-red-400"} px-2 py-1 text-[0.65rem] font-bold uppercase">
                   ${role.active ? "Ativo" : "Inativo"}
                 </span>
-                ${
-                  role.protected
-                    ? '<span class="rounded-full border border-blue-400/20 px-2 py-1 text-[0.65rem] font-bold uppercase text-blue-300">Protegido</span>'
-                    : ""
-                }
               </div>
               <p class="mt-2 text-sm text-gray-400">${escapeHtml(role.description || "Sem descrição.")}</p>
               <p class="mt-2 text-xs text-gray-500">${usageCount} acesso(s) usando este cargo.</p>
@@ -383,7 +378,7 @@ function renderizarCargos() {
         (item) => item.slug === button.dataset.toggleRole,
       );
 
-      if (!role || role.protected) {
+      if (!role) {
         return;
       }
 
@@ -467,7 +462,7 @@ function preencherEdicaoCargo(role) {
   document.getElementById("role-description").value = role.description || "";
   document.getElementById("role-order").value = role.sort_order || 0;
   document.getElementById("role-active").checked = Boolean(role.active);
-  document.getElementById("role-active").disabled = Boolean(role.protected);
+  document.getElementById("role-active").disabled = false;
   document.getElementById("role-cancel-button").classList.remove("hidden");
   document.getElementById("role-submit-label").textContent = "Atualizar cargo";
   document.getElementById("role-name").focus();

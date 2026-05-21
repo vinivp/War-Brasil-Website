@@ -41,6 +41,28 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
+function errorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (error && typeof error === "object") {
+    const maybeError = error as { error_description?: unknown; message?: unknown };
+
+    if (typeof maybeError.message === "string") {
+      return maybeError.message;
+    }
+
+    if (typeof maybeError.error_description === "string") {
+      return maybeError.error_description;
+    }
+
+    return JSON.stringify(error);
+  }
+
+  return "Erro inesperado.";
+}
+
 function getEnv(name: string) {
   const value = Deno.env.get(name);
 
@@ -344,10 +366,10 @@ Deno.serve(async (req) => {
 
     if (action === "update_role") {
       const slug = assertRoleSlug(body.slug);
-      const currentRole = await getRole(admin, slug, { requireActive: false });
+      await getRole(admin, slug, { requireActive: false });
       const name = assertRoleName(body.name);
       const description = assertRoleDescription(body.description);
-      const active = currentRole.protected ? true : body.active !== false;
+      const active = body.active !== false;
       const sortOrder = assertSortOrder(body.sort_order);
 
       const { error } = await admin
@@ -369,11 +391,7 @@ Deno.serve(async (req) => {
 
     if (action === "delete_role") {
       const slug = assertRoleSlug(body.slug);
-      const role = await getRole(admin, slug, { requireActive: false });
-
-      if (role.protected) {
-        throw new Error("Este cargo é protegido e não pode ser excluído.");
-      }
+      await getRole(admin, slug, { requireActive: false });
 
       const { count, error: countError } = await admin
         .from("staff_profiles")
@@ -484,7 +502,7 @@ Deno.serve(async (req) => {
 
       const { data: target, error: targetError } = await admin
         .from("staff_profiles")
-        .select("id")
+        .select("id, email, display_name")
         .eq("id", targetId)
         .maybeSingle();
 
@@ -494,11 +512,16 @@ Deno.serve(async (req) => {
 
       await assertUniqueProfileEmail(admin, email, targetId);
 
-      const authUpdate: Record<string, unknown> = {
-        email,
-        email_confirm: true,
-        user_metadata: { display_name: displayName },
-      };
+      const authUpdate: Record<string, unknown> = {};
+
+      if (String(target.display_name || "").trim() !== displayName) {
+        authUpdate.user_metadata = { display_name: displayName };
+      }
+
+      if (normalizeEmail(target.email) !== email) {
+        authUpdate.email = email;
+        authUpdate.email_confirm = true;
+      }
 
       if (password) {
         if (password.length < 8) {
@@ -508,13 +531,15 @@ Deno.serve(async (req) => {
         authUpdate.password = password;
       }
 
-      const { error: authError } = await admin.auth.admin.updateUserById(
-        targetId,
-        authUpdate,
-      );
+      if (Object.keys(authUpdate).length > 0) {
+        const { error: authError } = await admin.auth.admin.updateUserById(
+          targetId,
+          authUpdate,
+        );
 
-      if (authError) {
-        throw authError;
+        if (authError) {
+          throw authError;
+        }
       }
 
       const { error: profileError } = await admin
@@ -547,9 +572,6 @@ Deno.serve(async (req) => {
 
     return jsonResponse({ error: "Ação inválida." }, 400);
   } catch (error) {
-    return jsonResponse(
-      { error: error instanceof Error ? error.message : "Erro inesperado." },
-      400,
-    );
+    return jsonResponse({ error: errorMessage(error) }, 400);
   }
 });
