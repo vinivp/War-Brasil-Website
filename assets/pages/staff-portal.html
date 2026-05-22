@@ -60,7 +60,7 @@
           Portal da Staff
         </h1>
         <p class="mt-2 text-sm text-gray-400">
-          Gestão de loja, compras, console e banimentos.
+          Gestão de loja, linhagem, compras, console e banimentos.
         </p>
       </header>
 
@@ -71,6 +71,13 @@
           data-tab-target="products-tab"
         >
           Produtos
+        </button>
+        <button
+          type="button"
+          class="staff-tab rounded-xl border border-white/10 px-4 py-2 text-xs font-bold uppercase text-gray-300"
+          data-tab-target="lineage-tab"
+        >
+          Linhagem
         </button>
         <button
           type="button"
@@ -252,6 +259,123 @@
             </button>
           </form>
           <div id="products-list" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <section
+        id="lineage-tab"
+        class="staff-tab-panel hidden grid gap-6 xl:grid-cols-[420px_minmax(0,1fr)]"
+      >
+        <div class="staff-panel rounded-2xl p-5">
+          <div class="mb-4 flex items-start justify-between gap-3">
+            <div>
+              <h2
+                id="lineage-form-title"
+                class="font-fantasy text-xl uppercase text-yellow-500"
+              >
+                Novo membro
+              </h2>
+              <p class="mt-1 text-xs uppercase tracking-widest text-gray-500">
+                Cards da Linhagem Real
+              </p>
+            </div>
+            <button
+              id="lineage-cancel"
+              type="button"
+              class="hidden rounded-lg border border-white/10 px-3 py-2 text-xs font-bold uppercase text-gray-300 hover:text-white"
+            >
+              Cancelar
+            </button>
+          </div>
+          <form id="lineage-form" class="mb-5 grid gap-3">
+            <input id="lineage-id" type="hidden" />
+            <input
+              id="lineage-name"
+              class="staff-input"
+              maxlength="80"
+              placeholder="Nome exibido"
+              required
+            />
+            <input
+              id="lineage-role"
+              class="staff-input"
+              maxlength="60"
+              placeholder="Cargo exibido. Ex: Fundador"
+              required
+            />
+            <input
+              id="lineage-tagline"
+              class="staff-input"
+              maxlength="140"
+              placeholder="Frase curta"
+            />
+            <input
+              id="lineage-image"
+              class="staff-input"
+              maxlength="600"
+              placeholder="URL pública da imagem"
+            />
+            <input
+              id="lineage-file"
+              class="staff-input"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+            />
+            <img
+              id="lineage-image-preview"
+              src=""
+              alt=""
+              class="hidden aspect-square w-32 rounded-full border border-white/10 object-cover"
+            />
+            <select id="lineage-accent" class="staff-input">
+              <option value="yellow">Dourado</option>
+              <option value="blue">Azul</option>
+              <option value="red">Vermelho</option>
+              <option value="green">Verde</option>
+              <option value="purple">Roxo</option>
+              <option value="slate">Cinza</option>
+            </select>
+            <input
+              id="lineage-order"
+              class="staff-input"
+              type="number"
+              value="0"
+              placeholder="Ordem"
+            />
+            <label
+              class="flex items-center gap-3 rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-gray-300"
+            >
+              <input
+                id="lineage-active"
+                type="checkbox"
+                class="h-4 w-4 accent-yellow-500"
+                checked
+              />
+              Membro ativo
+            </label>
+            <button type="submit" class="staff-button">
+              <span id="lineage-submit-label">Criar membro</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="staff-panel rounded-2xl p-5">
+          <div
+            class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div>
+              <h2 class="font-fantasy text-xl uppercase text-yellow-500">
+                Linhagem cadastrada
+              </h2>
+              <p class="mt-1 text-sm text-gray-500">
+                Esses cards aparecem na seção final do site.
+              </p>
+            </div>
+            <button id="refresh-lineage" type="button" class="staff-button">
+              Atualizar
+            </button>
+          </div>
+          <div id="lineage-list" class="space-y-3"></div>
         </div>
       </section>
 

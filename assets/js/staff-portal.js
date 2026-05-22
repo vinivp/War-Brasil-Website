@@ -10,6 +10,8 @@ const staffState = {
     unread: 0,
   },
   orders: [],
+  lineage: [],
+  lineageEditingId: null,
   productEditingId: null,
   products: [],
   profile: null,
@@ -65,6 +67,7 @@ async function iniciarPortalStaff() {
   configurarChatStaff();
   await Promise.all([
     carregarCategoriasProdutos(),
+    carregarLinhagemStaff(),
     carregarCompras(),
     carregarConsole(),
     carregarBanimentos(),
@@ -114,6 +117,22 @@ function configurarForms() {
   document
     .getElementById("product-file")
     .addEventListener("change", atualizarPreviewArquivoProduto);
+
+  document
+    .getElementById("lineage-form")
+    .addEventListener("submit", salvarLinhagem);
+  document
+    .getElementById("lineage-cancel")
+    .addEventListener("click", limparFormularioLinhagem);
+  document
+    .getElementById("lineage-image")
+    .addEventListener("input", atualizarPreviewLinhagem);
+  document
+    .getElementById("lineage-file")
+    .addEventListener("change", atualizarPreviewArquivoLinhagem);
+  document
+    .getElementById("refresh-lineage")
+    .addEventListener("click", carregarLinhagemStaff);
 
   document
     .getElementById("refresh-orders")
@@ -301,6 +320,107 @@ async function subirImagemProduto(productName) {
   const { data } = warSupabase.storage.from(ASSET_BUCKET).getPublicUrl(path);
   document.getElementById("product-image").value = data.publicUrl;
   atualizarPreviewProduto();
+  return data.publicUrl;
+}
+
+async function salvarLinhagem(event) {
+  event.preventDefault();
+  const displayName = document.getElementById("lineage-name").value.trim();
+  const roleLabel = document.getElementById("lineage-role").value.trim();
+  let imageUrl = document.getElementById("lineage-image").value.trim();
+
+  if (!displayName) {
+    mostrarMensagem("Informe o nome do membro da linhagem.", true);
+    return;
+  }
+
+  if (!roleLabel) {
+    mostrarMensagem("Informe o cargo exibido.", true);
+    return;
+  }
+
+  try {
+    imageUrl = (await subirImagemLinhagem(displayName)) || imageUrl;
+  } catch (error) {
+    mostrarMensagem(error.message, true);
+    return;
+  }
+
+  const payload = {
+    accent: document.getElementById("lineage-accent").value,
+    active: document.getElementById("lineage-active").checked,
+    display_name: displayName,
+    image_url: imageUrl,
+    role_label: roleLabel,
+    sort_order: Number(document.getElementById("lineage-order").value || 0),
+    tagline: document.getElementById("lineage-tagline").value.trim(),
+    updated_by: staffState.profile.id,
+  };
+
+  const request = staffState.lineageEditingId
+    ? warSupabase
+        .from("staff_lineage")
+        .update(payload)
+        .eq("id", staffState.lineageEditingId)
+    : warSupabase.from("staff_lineage").insert({
+        ...payload,
+        created_by: staffState.profile.id,
+      });
+
+  const { error } = await request;
+
+  if (error) {
+    mostrarMensagem(error.message, true);
+    return;
+  }
+
+  mostrarMensagem(
+    staffState.lineageEditingId ? "Membro atualizado." : "Membro criado.",
+  );
+  limparFormularioLinhagem();
+  await carregarLinhagemStaff();
+}
+
+async function subirImagemLinhagem(memberName) {
+  const fileInput = document.getElementById("lineage-file");
+  const file = fileInput.files?.[0];
+
+  if (!file) {
+    return "";
+  }
+
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    throw new Error("Use uma imagem JPG, PNG ou WEBP.");
+  }
+
+  if (file.size > 10 * 1024 * 1024) {
+    throw new Error("A imagem precisa ter até 10 MB.");
+  }
+
+  const extension =
+    (file.name.split(".").pop()?.toLowerCase() || "png").replace(
+      "jpeg",
+      "jpg",
+    );
+  const path = `img/staff-lineage-${criarSlug(memberName || file.name)}-${Date.now()}.${extension}`;
+
+  mostrarMensagem("Enviando imagem da linhagem...");
+
+  const { error } = await warSupabase.storage
+    .from(ASSET_BUCKET)
+    .upload(path, file, {
+      cacheControl: "31536000",
+      contentType: file.type,
+      upsert: true,
+    });
+
+  if (error) {
+    throw error;
+  }
+
+  const { data } = warSupabase.storage.from(ASSET_BUCKET).getPublicUrl(path);
+  document.getElementById("lineage-image").value = data.publicUrl;
+  atualizarPreviewLinhagem();
   return data.publicUrl;
 }
 
@@ -655,6 +775,218 @@ function atualizarPreviewProduto() {
   preview.src = imageUrl;
   preview.alt = "Prévia da imagem do produto";
   preview.classList.remove("hidden");
+}
+
+async function carregarLinhagemStaff() {
+  const { data, error } = await warSupabase
+    .from("staff_lineage")
+    .select("*")
+    .order("active", { ascending: false })
+    .order("sort_order", { ascending: true })
+    .order("display_name", { ascending: true });
+
+  if (error) {
+    mostrarMensagem(error.message, true);
+    return;
+  }
+
+  staffState.lineage = data || [];
+  renderizarLinhagemStaff();
+}
+
+function renderizarLinhagemStaff() {
+  const list = document.getElementById("lineage-list");
+
+  list.innerHTML =
+    staffState.lineage
+      .map(
+        (member) => `
+        <article class="rounded-xl border border-white/10 bg-black/20 p-4">
+          <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div class="flex min-w-0 gap-4">
+              <img src="${escapeAttr(member.image_url || getAssetUrl("logo-oficial.webp"))}" alt="${escapeAttr(member.display_name)}" class="h-20 w-20 shrink-0 rounded-full border border-white/10 object-cover" loading="lazy" />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="font-bold text-white">${escapeHtml(member.display_name)}</h3>
+                  <span class="rounded-full border border-yellow-500/20 px-2 py-1 text-[0.65rem] font-bold uppercase text-yellow-400">
+                    ${escapeHtml(member.role_label)}
+                  </span>
+                  <span class="rounded-full border ${member.active ? "border-green-500/20 text-green-400" : "border-red-500/20 text-red-400"} px-2 py-1 text-[0.65rem] font-bold uppercase">
+                    ${member.active ? "Ativo" : "Inativo"}
+                  </span>
+                </div>
+                <p class="mt-2 text-sm italic text-gray-400">"${escapeHtml(member.tagline || "Sem frase cadastrada")}"</p>
+                <p class="mt-2 text-xs uppercase text-gray-500">Ordem ${member.sort_order} • Acento ${rotuloAcentoLinhagem(member.accent)}</p>
+                <p class="mt-1 text-xs text-gray-600">Criado em ${formatarData(member.created_at)}</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" data-edit-lineage="${member.id}" class="rounded-lg border border-white/10 px-3 py-2 text-xs font-bold uppercase text-gray-300 hover:text-white">
+                <i class="fas fa-pen mr-2" aria-hidden="true"></i>Editar
+              </button>
+              <button type="button" data-toggle-lineage="${member.id}" class="rounded-lg border border-white/10 px-3 py-2 text-xs font-bold uppercase ${member.active ? "text-yellow-400" : "text-green-400"}">
+                ${member.active ? "Inativar" : "Ativar"}
+              </button>
+              <button type="button" data-delete-lineage="${member.id}" class="rounded-lg border border-red-500/20 px-3 py-2 text-xs font-bold uppercase text-red-300 hover:bg-red-500/10">
+                <i class="fas fa-trash mr-2" aria-hidden="true"></i>Excluir
+              </button>
+            </div>
+          </div>
+        </article>`,
+      )
+      .join("") ||
+    '<p class="text-sm text-gray-500">Nenhum membro da linhagem cadastrado.</p>';
+
+  list.querySelectorAll("[data-edit-lineage]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const member = staffState.lineage.find(
+        (item) => item.id === button.dataset.editLineage,
+      );
+      preencherEdicaoLinhagem(member);
+    });
+  });
+
+  list.querySelectorAll("[data-toggle-lineage]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const member = staffState.lineage.find(
+        (item) => item.id === button.dataset.toggleLineage,
+      );
+
+      if (!member) {
+        return;
+      }
+
+      await atualizarLinhagemStaff(member.id, { active: !member.active });
+    });
+  });
+
+  list.querySelectorAll("[data-delete-lineage]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const member = staffState.lineage.find(
+        (item) => item.id === button.dataset.deleteLineage,
+      );
+
+      if (
+        !member ||
+        !window.confirm(`Excluir "${member.display_name}" da Linhagem Real?`)
+      ) {
+        return;
+      }
+
+      const { error } = await warSupabase
+        .from("staff_lineage")
+        .delete()
+        .eq("id", member.id);
+
+      if (error) {
+        mostrarMensagem(error.message, true);
+        return;
+      }
+
+      limparFormularioLinhagem();
+      mostrarMensagem("Membro removido da linhagem.");
+      await carregarLinhagemStaff();
+    });
+  });
+}
+
+async function atualizarLinhagemStaff(id, payload) {
+  const { error } = await warSupabase
+    .from("staff_lineage")
+    .update({
+      ...payload,
+      updated_by: staffState.profile.id,
+    })
+    .eq("id", id);
+
+  if (error) {
+    mostrarMensagem(error.message, true);
+    return;
+  }
+
+  await carregarLinhagemStaff();
+}
+
+function preencherEdicaoLinhagem(member) {
+  if (!member) {
+    return;
+  }
+
+  staffState.lineageEditingId = member.id;
+  document.getElementById("lineage-id").value = member.id;
+  document.getElementById("lineage-name").value = member.display_name || "";
+  document.getElementById("lineage-role").value = member.role_label || "";
+  document.getElementById("lineage-tagline").value = member.tagline || "";
+  document.getElementById("lineage-image").value = member.image_url || "";
+  document.getElementById("lineage-accent").value = member.accent || "yellow";
+  document.getElementById("lineage-order").value = member.sort_order || 0;
+  document.getElementById("lineage-active").checked = Boolean(member.active);
+  document.getElementById("lineage-form-title").textContent = "Editar membro";
+  document.getElementById("lineage-submit-label").textContent =
+    "Atualizar membro";
+  document.getElementById("lineage-cancel").classList.remove("hidden");
+  document.getElementById("lineage-file").value = "";
+  atualizarPreviewLinhagem();
+  document.getElementById("lineage-form").scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+}
+
+function limparFormularioLinhagem() {
+  staffState.lineageEditingId = null;
+  document.getElementById("lineage-form").reset();
+  document.getElementById("lineage-id").value = "";
+  document.getElementById("lineage-accent").value = "yellow";
+  document.getElementById("lineage-order").value = 0;
+  document.getElementById("lineage-active").checked = true;
+  document.getElementById("lineage-form-title").textContent = "Novo membro";
+  document.getElementById("lineage-submit-label").textContent = "Criar membro";
+  document.getElementById("lineage-cancel").classList.add("hidden");
+  atualizarPreviewLinhagem();
+}
+
+function atualizarPreviewArquivoLinhagem() {
+  const file = document.getElementById("lineage-file").files?.[0];
+
+  if (!file) {
+    atualizarPreviewLinhagem();
+    return;
+  }
+
+  const preview = document.getElementById("lineage-image-preview");
+  preview.src = URL.createObjectURL(file);
+  preview.alt = "Prévia da imagem da linhagem";
+  preview.classList.remove("hidden");
+}
+
+function atualizarPreviewLinhagem() {
+  const imageUrl = document.getElementById("lineage-image").value.trim();
+  const preview = document.getElementById("lineage-image-preview");
+
+  if (!imageUrl) {
+    preview.src = "";
+    preview.alt = "";
+    preview.classList.add("hidden");
+    return;
+  }
+
+  preview.src = imageUrl;
+  preview.alt = "Prévia da imagem da linhagem";
+  preview.classList.remove("hidden");
+}
+
+function rotuloAcentoLinhagem(accent) {
+  const labels = {
+    blue: "azul",
+    green: "verde",
+    purple: "roxo",
+    red: "vermelho",
+    slate: "cinza",
+    yellow: "dourado",
+  };
+
+  return labels[accent] || labels.yellow;
 }
 
 async function carregarCompras() {
